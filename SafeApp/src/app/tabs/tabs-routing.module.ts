@@ -20,8 +20,8 @@ const routes: Routes = [
         loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
       },
       {
-        path: 'run-components',
-        loadChildren: () => import('../run-components/run-components.module').then(m => m.RunComponentsPageModule)
+        path: 'launch-sensors',
+        loadChildren: () => import('../launch-sensors/launch-sensors.module').then(m => m.LaunchSensorsPageModule)
       },
       {
         path: '',

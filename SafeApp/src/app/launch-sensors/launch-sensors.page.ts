@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 //import { File } from '@ionic-native/file/ngx';
 
 @Component({
-  selector: 'app-run-components',
-  templateUrl: './run-components.page.html',
-  styleUrls: ['./run-components.page.scss'],
+  selector: 'app-launch-sensors',
+  templateUrl: './launch-sensors.page.html',
+  styleUrls: ['./launch-sensors.page.scss'],
 })
-export class RunComponentsPage implements OnInit {
+export class LaunchSensorsPage implements OnInit {
   COMPONENTS = [];
 
   constructor(

@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: 'run-components',
-    loadChildren: () => import('./run-components/run-components.module').then( m => m.RunComponentsPageModule)
+    loadChildren: () => import('./launch-sensors/launch-sensors.module').then( m => m.LaunchSensorsPageModule)
   }
 ];
 @NgModule({
