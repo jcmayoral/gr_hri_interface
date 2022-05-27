@@ -9,6 +9,10 @@ const routes: Routes = [
   {
     path: 'run-components',
     loadChildren: () => import('./launch-sensors/launch-sensors.module').then( m => m.LaunchSensorsPageModule)
+  },
+  {
+    path: 'diagnostics',
+    loadChildren: () => import('./diagnostics/diagnostics.module').then( m => m.DiagnosticsPageModule)
   }
 ];
 @NgModule({
