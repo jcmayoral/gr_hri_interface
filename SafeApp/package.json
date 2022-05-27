@@ -28,6 +28,8 @@
     "@ionic-native/file": "^5.36.0",
     "@ionic/angular": "^6.0.0",
     "cordova-plugin-file": "^7.0.0",
+    "ionic-angular": "^3.9.10",
+    "nipplejs": "^0.9.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
