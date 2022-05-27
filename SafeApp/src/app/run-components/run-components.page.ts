@@ -6,10 +6,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./run-components.page.scss'],
 })
 export class RunComponentsPage implements OnInit {
+  COMPONENTS = [];
 
-  constructor() { }
+  constructor() {
+    this.loadComponents()
+  }
 
   ngOnInit() {
+  }
+
+  loadComponents(){
+    var data={
+      component: "IMU",
+      isChecked: false
+    }
+    this.COMPONENTS.push(data);
   }
 
 }

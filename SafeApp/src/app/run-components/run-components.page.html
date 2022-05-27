@@ -7,28 +7,16 @@
 <ion-content>
   <div class="wrapper">
     <ion-grid>
-      <ion-row>
+      <ion-row *ngFor="let entry of COMPONENTS">
         <ion-col>
-           <b> Camera </b>
+           <b> {{entry.component}} </b>
         </ion-col>
-        <ion-col></ion-col>
+        <ion-col>
+          <ion-checkbox [(ngModel)]="entry.isChecked" name={entry.materia} (ionChange)="checkboxClick($event)" entry.component></ion-checkbox>
+        </ion-col>
       </ion-row>
       <!--ion-row *ngFor="let entry of Codigos">
       <ion-col>{{entry.materia}}</ion-col-->
-      <ion-row>
-        <ion-col>
-          <b> IMU </b>
-          <!--ion-checkbox  [(ngModel)]="entry.isChecked" name={entry.materia} (ionChange)="checkboxClick($event)" entry.materia></ion-checkbox-->
-        </ion-col>
-        <ion-checkbox></ion-checkbox>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-button expand="block"> GPS </ion-button>
-          <!--ion-checkbox  [(ngModel)]="entry.isChecked" name={entry.materia} (ionChange)="checkboxClick($event)" entry.materia></ion-checkbox-->
-        </ion-col>
-        <ion-col> <b> Código </b> </ion-col>
-      </ion-row>
     </ion-grid>
     <ion-button expand="block"> Start Components </ion-button>
   </div>
