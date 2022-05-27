@@ -5,7 +5,31 @@
 </ion-header>
 
 <ion-content>
-  <ion-button> Camera </ion-button>
-  <ion-button> LiDAR </ion-button>
-
+  <div class="wrapper">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+           <b> Camera </b>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+      <!--ion-row *ngFor="let entry of Codigos">
+      <ion-col>{{entry.materia}}</ion-col-->
+      <ion-row>
+        <ion-col>
+          <b> IMU </b>
+          <!--ion-checkbox  [(ngModel)]="entry.isChecked" name={entry.materia} (ionChange)="checkboxClick($event)" entry.materia></ion-checkbox-->
+        </ion-col>
+        <ion-checkbox></ion-checkbox>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block"> GPS </ion-button>
+          <!--ion-checkbox  [(ngModel)]="entry.isChecked" name={entry.materia} (ionChange)="checkboxClick($event)" entry.materia></ion-checkbox-->
+        </ion-col>
+        <ion-col> <b> Código </b> </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-button expand="block"> Start Components </ion-button>
+  </div>
 </ion-content>
