@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+//import { File } from '@ionic-native/file/ngx';
 
 @Component({
   selector: 'app-run-components',
@@ -8,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class RunComponentsPage implements OnInit {
   COMPONENTS = [];
 
-  constructor() {
+  constructor(
+    //private file:File
+  )
+  {
+    //this.readFile()
     this.loadComponents()
   }
 
@@ -16,11 +21,27 @@ export class RunComponentsPage implements OnInit {
   }
 
   loadComponents(){
-    var data={
-      component: "IMU",
-      isChecked: false
+
+    const components = ["IMU", "GPS", "Camera", "LiDAR"]
+    for (const c of components){
+      var data={
+        component: c,
+        isChecked: false
+      }
+      this.COMPONENTS.push(data);
     }
-    this.COMPONENTS.push(data);
   }
+
+  /*
+  async readFile() {
+    console.log("here")
+    this.file.dataDirectory="."
+    var promise = await this.file.readAsText("/home/jose", 'filename');
+    console.log(promise, this.file.dataDirectory)
+    await promise.then(value => {
+      console.log(value);
+    });
+  }
+  */
 
 }

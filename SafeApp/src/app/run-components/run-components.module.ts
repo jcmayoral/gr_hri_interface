@@ -8,6 +8,8 @@ import { RunComponentsPageRoutingModule } from './run-components-routing.module'
 
 import { RunComponentsPage } from './run-components.page';
 
+//import { File } from '@ionic-native/file/ngx';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +17,7 @@ import { RunComponentsPage } from './run-components.page';
     IonicModule,
     RunComponentsPageRoutingModule
   ],
+  //providers: [File],
   declarations: [RunComponentsPage]
 })
 export class RunComponentsPageModule {}
