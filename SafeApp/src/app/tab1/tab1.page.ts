@@ -14,7 +14,8 @@ export class Tab1Page {
   size :number = 50;
 
   constructor(public navCtrl: NavController, 
-              public req : RequestsService) {
+              private req : RequestsService,
+              ) {
 
   }
 
@@ -59,6 +60,7 @@ export class Tab1Page {
     });
     */
   }
+
   lock(){
     console.log("lock")
     this.req.lock()
