@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController} from '@ionic/angular';
-
+import {RequestsService} from '../services/requests.service'
 
 //import { create } from 'nipplejs';
 import {create} from 'nipplejs';
@@ -13,7 +13,8 @@ import {create} from 'nipplejs';
 export class Tab1Page {
   size :number = 50;
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, 
+              public req : RequestsService) {
 
   }
 
@@ -60,6 +61,7 @@ export class Tab1Page {
   }
   lock(){
     console.log("lock")
+    this.req.lock()
   }
 
 
