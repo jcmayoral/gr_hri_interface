@@ -58,6 +58,9 @@ export class Tab1Page {
     });
     */
   }
+  lock(){
+    console.log("lock")
+  }
 
 
 }
