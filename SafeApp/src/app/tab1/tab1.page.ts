@@ -61,9 +61,10 @@ export class Tab1Page {
     */
   }
 
-  lock(){
+  async lock(){
     console.log("lock")
-    this.req.lock()
+    const response = await this.req.lock()
+    console.log("response", response)
   }
 
 

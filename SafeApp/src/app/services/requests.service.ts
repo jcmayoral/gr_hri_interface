@@ -24,7 +24,7 @@ export class RequestsService {
   constructor(private httpClient: HttpClient)  { }
 
   async lock(){
-    await this.post3("lock/", {"lock": true})
+    return await this.post3("lock/", {"lock": true})
     //this.get("/users/me")
   }
 
@@ -40,8 +40,12 @@ export class RequestsService {
     const rawResponse = await fetch(this.endpoint+route, {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive',
+        'Authorization': "Basic am9zZToxMjM0"//jose:1234'
+        
       },
       body: JSON.stringify({lock: 1})
     }).catch(function(error){
@@ -59,12 +63,14 @@ export class RequestsService {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic am9zZToxMjM0' //+ 'jose:1234'
       },
       data: JSON.stringify({lock: 1})
     }).catch(function(error){
       alert(error)
     });
+    return await rawResponse
     //const content = await rawResponse.json();
     //console.log(content);
 
