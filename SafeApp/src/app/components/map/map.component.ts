@@ -1,53 +1,43 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
-
-declare var L: any;
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import * as Leaflet from 'leaflet';
+import { antPath } from 'leaflet-ant-path';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnDestroy {
 
-  @ViewChild("map")
-  public mapElement: ElementRef;
+  map: Leaflet.Map;
 
-  /*
-  @Input()
-  public appId: any;
+  constructor() { }
 
-  @Input()
-  public appCode: any;
+  ngOnInit() {console.log("init"); this.leafletMap() }
+  ionViewDidEnter() { this.leafletMap(); }
 
-  @Input()
-  public lat: any;
+  leafletMap() {
+    console.log("aaa")
+    this.map = Leaflet.map('mapId').setView([28.644800, 77.216721], 5);
+    var url = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
+    //original 
+    //'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+    Leaflet.tileLayer(url, {
+      //attribution: 'edupala.com © Angular LeafLet',
+    }).addTo(this.map);
 
-  @Input()
-  public lng: any;
 
-  */
-  public constructor() {
-    console.log("constructor")
-   }
+    //Leaflet.marker([28.6, 77]).addTo(this.map).bindPopup('Delhi').openPopup();
+    //Leaflet.marker([34, 77]).addTo(this.map).bindPopup('Leh').openPopup();
 
-  public ngOnInit() {
-    console.log("oninit")
-   }
-
-  public ngAfterViewInit() {
-      console.log("in Map")
-      /*
-      const map = L.map(this.mapElement.nativeElement, {
-          center: [this.lat, this.lng],
-          zoom: 10,
-          layers: [L.tileLayer("https://2.base.maps.api.here.com/maptile/2.1/maptile/newest/reduced.day/{z}/{x}/{y}/512/png8?app_id=" + this.appId + "&app_code=" + this.appCode + "&ppi=320")],
-          zoomControl: true
-      });
-      setTimeout(() => {
-          map.invalidateSize();
-      }, 1000);
-      */
+    antPath([[28.644800, 77.216721], [34.1526, 77.5771]],
+      { color: '#FF0000', weight: 5, opacity: 0.6 })
+      .addTo(this.map);
   }
 
+  /** Remove map when we have multiple map object */
+  ngOnDestroy() {
+    this.map.remove();
+  }
 
 }
