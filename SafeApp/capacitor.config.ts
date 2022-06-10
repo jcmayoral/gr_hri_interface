@@ -5,7 +5,7 @@ const config: CapacitorConfig = {
   appName: 'SafeApp',
   webDir: 'www',
   bundledWebRuntime: false,
-  linuxAndroidStudioPath: "/media/mount/programs/android-studio/bin/studio.sh"
+  //linuxAndroidStudioPath: "/media/mount/programs/android-studio/bin/studio.sh"
 };
 
 export default config;

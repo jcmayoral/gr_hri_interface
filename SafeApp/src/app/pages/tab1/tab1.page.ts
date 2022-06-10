@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController} from '@ionic/angular';
-import {RequestsService} from '../services/requests.service'
+import {RequestsService} from '../../services/requests.service'
 
 //import { create } from 'nipplejs';
 import {create} from 'nipplejs';
