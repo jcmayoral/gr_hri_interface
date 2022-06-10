@@ -12,6 +12,7 @@ export class MapComponent implements OnInit {
   @ViewChild("map")
   public mapElement: ElementRef;
 
+  /*
   @Input()
   public appId: any;
 
@@ -24,11 +25,18 @@ export class MapComponent implements OnInit {
   @Input()
   public lng: any;
 
-  public constructor() { }
+  */
+  public constructor() {
+    console.log("constructor")
+   }
 
-  public ngOnInit() { }
+  public ngOnInit() {
+    console.log("oninit")
+   }
 
   public ngAfterViewInit() {
+      console.log("in Map")
+      /*
       const map = L.map(this.mapElement.nativeElement, {
           center: [this.lat, this.lng],
           zoom: 10,
@@ -38,6 +46,7 @@ export class MapComponent implements OnInit {
       setTimeout(() => {
           map.invalidateSize();
       }, 1000);
+      */
   }
 
 

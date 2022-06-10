@@ -8,14 +8,16 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { Tab2PageRoutingModule } from './tab2-routing.module';
 
+import { MapComponent } from 'src/app/components/map/map.component';
+
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab2PageRoutingModule
+    Tab2PageRoutingModule,
   ],
-  declarations: [Tab2Page]
+  declarations: [Tab2Page, MapComponent],
 })
 export class Tab2PageModule {}
