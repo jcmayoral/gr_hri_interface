@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: 'diagnostics',
     loadChildren: () => import('./pages/diagnostics/diagnostics.module').then( m => m.DiagnosticsPageModule)
+  },
+  {
+    path: 'semi-autonomous',
+    loadChildren: () => import('./pages/semi-autonomous/semi-autonomous.module').then( m => m.SemiAutonomousPageModule)
   }
 ];
 @NgModule({
