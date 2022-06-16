@@ -7,6 +7,8 @@ import {Http} from '@capacitor-community/http'
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class RequestsService {
   //endpoint = 'http://192.168.1.67:8000/'
   //endpoint = 'http://grassrobotics.sytes.net/'
@@ -28,12 +30,20 @@ export class RequestsService {
     //this.get("/users/me")
   }
 
-  get(path: string){
-    console.log("get "+ this.endpoint+path)
-    return this.httpClient.get<any>(this.endpoint+path, this.httpOptions)
-      .pipe(
-        catchError(this.handleError<any>('Error occured'))
-      );
+  async get(route: string){
+    console.log("get "+ this.endpoint+route)
+
+    const rawResponse = await Http.get({
+      url: this.endpoint+route,
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic am9zZToxMjM0' //+ 'jose:1234'
+      },
+      //data: JSON.stringify({lock: 1})
+    })
+    return rawResponse
   }
 
   async post2(route:string, msg:any){
