@@ -17,6 +17,10 @@ const routes: Routes = [
   {
     path: 'semi-autonomous',
     loadChildren: () => import('./pages/semi-autonomous/semi-autonomous.module').then( m => m.SemiAutonomousPageModule)
+  },
+  {
+    path: 'stats',
+    loadChildren: () => import('./pages/stats/stats.module').then( m => m.StatsPageModule)
   }
 ];
 @NgModule({

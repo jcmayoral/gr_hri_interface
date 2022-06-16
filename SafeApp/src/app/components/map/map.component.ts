@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit, ElementRef } from '@angular/core';
 import * as L from 'leaflet';
 import { antPath } from 'leaflet-ant-path';
 //import { ElementRef } from '@angular/core';
@@ -24,16 +24,29 @@ L.Marker.prototype.options.icon = iconDefault;
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
 })
-export class MapComponent implements OnInit, OnDestroy {
-  //@ViewChild('mapId') mymap: ElementRef;
+export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('map') mymap: ElementRef;
   map: L.Map;
 
   constructor() { }
 
-  ngOnInit() {console.log("init"); this.leafletMap() }
-  ionViewDidEnter() { this.leafletMap(); }
+  ngOnInit() {
+    console.log("init");
+    //this.leafletMap()
+  }
 
-  leafletMap() {
+  ionViewDidEnter() { 
+    console.log("did")
+    //this.leafletMap(); 
+  }
+
+  ngAfterViewInit(): void {
+    console.log("after")
+    this.leafletMap()
+  }
+
+
+  async leafletMap() {
     /*
     console.log("aaaA")
     this.map = Leaflet.map('mapId',{
@@ -67,17 +80,15 @@ export class MapComponent implements OnInit, OnDestroy {
     //  .addTo(this.map);
     */
 
-    this.map = L.map('map',{
-      zoomControl: false,
-      attributionControl: false
-    })
+    this.map = L.map("map",{
+      zoomControl: true})
 
     var bounds = [
       [19.397391, -99.182275],
       [19.403516, -99.167656]
     ];
     //this.map.fitBounds(bounds)
-    console.log("aaaN")
+    console.log("aaaN", this.map, this.mymap)
 
     var url = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
     //original 
@@ -90,18 +101,18 @@ export class MapComponent implements OnInit, OnDestroy {
     //  }).addTo(this.map), 10000
     //)
 
-    L.tileLayer(url, {
+    await L.tileLayer(url, {
       maxZoom: 20,
       //attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
 
     //this.map.dragging.disable()
-    this.map = this.map.setView([19.402069, -99.171111],12);
-    var marker = L.marker([19.402069, -99.171111])
-    var bounds = this.map.getBounds();
-    this.map.setView([19.402069, -99.171111], 10);
-    marker.addTo(this.map);
-    //L.marker([19.402069, -99.171121]).addTo(this.map);
+    this.map.setView([19.402069, -99.171111],12);
+    //var marker = L.marker([19.402069, -99.171111])
+    //var bounds = this.map.getBounds();
+    //this.map.setView([19.402069, -99.171111], 10);
+    //marker.addTo(this.map);
+    L.marker([19.402069, -99.171121]).addTo(this.map);
     //var marker2 = new L.Marker(new L.LatLng(19.402069, -99.171131));
     //this.map.addLayer(marker2);
     // .bindPopup('Map Frame').openPopup();

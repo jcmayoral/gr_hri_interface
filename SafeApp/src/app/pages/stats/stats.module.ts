@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SemiAutonomousPageRoutingModule } from './semi-autonomous-routing.module';
+import { StatsPageRoutingModule } from './stats-routing.module';
 
-import { SemiAutonomousPage } from './semi-autonomous.page';
+import { StatsPage } from './stats.page';
 import { ChartComponent } from 'src/app/components/chart/chart.component';
 
 @NgModule({
@@ -14,8 +14,8 @@ import { ChartComponent } from 'src/app/components/chart/chart.component';
     CommonModule,
     FormsModule,
     IonicModule,
-    SemiAutonomousPageRoutingModule
+    StatsPageRoutingModule
   ],
-  declarations: [SemiAutonomousPage, ChartComponent]
+  declarations: [StatsPage, ChartComponent]
 })
-export class SemiAutonomousPageModule {}
+export class StatsPageModule {}

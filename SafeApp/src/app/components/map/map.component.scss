@@ -6,9 +6,17 @@
     height: 20%;
     outline: dashed 1px black;
   }
-
+#parent{
+  background-color: #00ff26;
+  position: fixed;
+  z-index: 9999;
+  padding: 5px;
+  display: none;
+  border-radius: 10px;
+  }
 .mymap {
   margin: auto;
+  position: relative;
   height: 50%;
   width: 80%;
   outline: dashed 1px black;

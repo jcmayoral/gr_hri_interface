@@ -32,6 +32,10 @@ const routes: Routes = [
         loadChildren: () => import('../diagnostics/diagnostics.module').then(m => m.DiagnosticsPageModule)
       },
       {
+        path: 'stats',
+        loadChildren: () => import('../stats/stats.module').then(m => m.StatsPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'
