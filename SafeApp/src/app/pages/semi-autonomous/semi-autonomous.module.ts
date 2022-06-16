@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { SemiAutonomousPageRoutingModule } from './semi-autonomous-routing.module';
 
 import { SemiAutonomousPage } from './semi-autonomous.page';
-import { ChartComponent } from 'src/app/components/chart/chart.component';
+import { ScatterComponent } from 'src/app/components/scatter/scatter.component';
 
 @NgModule({
   imports: [
@@ -16,6 +16,6 @@ import { ChartComponent } from 'src/app/components/chart/chart.component';
     IonicModule,
     SemiAutonomousPageRoutingModule
   ],
-  declarations: [SemiAutonomousPage, ChartComponent]
+  declarations: [SemiAutonomousPage, ScatterComponent]
 })
 export class SemiAutonomousPageModule {}
