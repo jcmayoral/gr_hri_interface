@@ -30,9 +30,14 @@ export class VoronoiComponent implements OnInit {
   }
 
   drawPoints(canvas, points) {
+    var heightRatio = 1.5;
+    canvas.height = canvas.height * heightRatio
+    canvas.width= canvas.width * heightRatio
+
     let ctx = canvas.getContext('2d');
     ctx.save();
 
+    
     //ctx.fillStyle = "hsl(0, 50%, 50%)";
     ctx.font = '0.3px serif';
     ctx.fillStyle = "#ff0000"; //<======= here
@@ -56,12 +61,12 @@ export class VoronoiComponent implements OnInit {
     ctx.closePath()
 
     ctx.beginPath();
-    ctx.rect(0, 0, 300, 300);
+    ctx.rect(0, 0, 300, 200);
     ctx.strokeStyle = 'red';
     ctx.stroke();
     ctx.closePath();
 
-    ctx.scale(200,200);
+    //ctx.scale(200,200);
 
     ctx.restore();    
 }
