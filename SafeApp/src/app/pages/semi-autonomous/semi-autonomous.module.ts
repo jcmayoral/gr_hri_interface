@@ -8,6 +8,7 @@ import { SemiAutonomousPageRoutingModule } from './semi-autonomous-routing.modul
 
 import { SemiAutonomousPage } from './semi-autonomous.page';
 import { ScatterComponent } from 'src/app/components/scatter/scatter.component';
+import { VoronoiComponent } from 'src/app/components/voronoi/voronoi.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { ScatterComponent } from 'src/app/components/scatter/scatter.component';
     IonicModule,
     SemiAutonomousPageRoutingModule
   ],
-  declarations: [SemiAutonomousPage, ScatterComponent]
+  declarations: [SemiAutonomousPage, ScatterComponent, VoronoiComponent]
 })
 export class SemiAutonomousPageModule {}

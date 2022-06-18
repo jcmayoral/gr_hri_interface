@@ -16,7 +16,7 @@ export class ScatterComponent implements AfterViewInit {
   ngAfterViewInit() {
     Chart.register(ScatterController, LinearScale, PointElement, LineElement)
     this.makeScatter()
-    this.makeLines()
+    //this.makeLines()
   }
 
   getData(){
