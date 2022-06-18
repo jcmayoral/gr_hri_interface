@@ -16,6 +16,7 @@ export class ScatterComponent implements AfterViewInit {
   ngAfterViewInit() {
     Chart.register(ScatterController, LinearScale, PointElement, LineElement)
     this.makeScatter()
+    this.makeLines()
   }
 
   getData(){
@@ -43,6 +44,40 @@ export class ScatterComponent implements AfterViewInit {
       }]
     }
     return data
+  }
+
+  makeLines(){
+    const labels = {
+      id: 'scatterDataLabels',
+      afterDatasetsDraw(chart, args, options){
+        const {ctx} = chart;
+        ctx.save()
+        ctx.font='20px sans-seriff'
+
+        for (let x = 0; x < chart.config.data.datasets.length; x++){
+          for (let i = 0; i < chart.config.data.datasets[x].data.length; i++){
+            //const textwidth = ctx.measureText(chart.config.data.datasets[x].data[i].status)
+            ctx.fillText(chart.config.data.datasets[x].data[i].status,
+              chart.getDatasetMeta(x).data[i].x ,
+              chart.getDatasetMeta(x).data[i].y)
+          }
+        }
+      }
+    }
+    const data = this.getData()
+    this.scatterChart = new Chart(this.scatterCanvas.nativeElement, {
+      type: 'line',
+      data: data,
+      options: {
+        scales: {
+          x: {
+            type: 'linear',
+            position: 'bottom'
+          }
+        },
+      },
+      plugins: [labels]
+    })
   }
 
   makeScatter(){
@@ -78,5 +113,4 @@ export class ScatterComponent implements AfterViewInit {
       plugins: [datalabels]
     })
   }
-
 }

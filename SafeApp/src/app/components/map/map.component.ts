@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit, ElementRef } from '@angular/core';
+import { ViewDidEnter } from '@ionic/angular';
 import * as L from 'leaflet';
 import { antPath } from 'leaflet-ant-path';
 //import { ElementRef } from '@angular/core';
@@ -35,13 +36,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     //this.leafletMap()
   }
 
-  ionViewDidEnter() { 
-    console.log("did")
-    //this.leafletMap(); 
-  }
-
   ngAfterViewInit(): void {
-    console.log("after")
+    console.log("here")
     this.leafletMap()
   }
 
@@ -112,7 +108,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     //var bounds = this.map.getBounds();
     //this.map.setView([19.402069, -99.171111], 10);
     //marker.addTo(this.map);
-    L.marker([19.402069, -99.171121]).addTo(this.map);
+    //L.marker([19.402069, -99.171121]).addTo(this.map);
     //var marker2 = new L.Marker(new L.LatLng(19.402069, -99.171131));
     //this.map.addLayer(marker2);
     // .bindPopup('Map Frame').openPopup();

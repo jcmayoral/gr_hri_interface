@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ViewDidEnter } from '@ionic/angular';
 import {RequestsService} from '../../services/requests.service'
 
 @Component({
@@ -6,13 +7,13 @@ import {RequestsService} from '../../services/requests.service'
   templateUrl: './semi-autonomous.page.html',
   styleUrls: ['./semi-autonomous.page.scss'],
 })
-export class SemiAutonomousPage implements OnInit {
+export class SemiAutonomousPage implements ViewDidEnter {
 
   constructor(private req: RequestsService) { 
 
   }
 
-  ngOnInit() {
+  ionViewDidEnter() {
     console.log("init")
     this.loadPoints()
   
