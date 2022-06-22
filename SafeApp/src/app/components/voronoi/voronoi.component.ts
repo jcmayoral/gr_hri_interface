@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import * as d3 from 'd3-selection';
-import * as d3Scale from 'd3-scale';
-import * as d3Array from 'd3-array';
-import * as d3Axis from 'd3-axis'
+import * as d3 from 'd3';
+//import * as d3Scale from 'd3-scale';
+//import * as d3Array from 'd3-array';
+//import * as d3Axis from 'd3-axis'
 
 @Component({
   selector: 'app-voronoi',
@@ -48,6 +48,7 @@ export class VoronoiComponent implements OnInit {
     this.initAxes();
     this.drawAxes();
     this.drawChart();
+    this.scatter();
   }
 
   generatePoints(){
@@ -114,21 +115,21 @@ export class VoronoiComponent implements OnInit {
   }
 
   initAxes() {
-    this.x = d3Scale.scaleBand().rangeRound([0, this.width]).padding(0.1);
-    this.y = d3Scale.scaleLinear().rangeRound([this.height, 0]);
+    this.x = d3.scaleBand().rangeRound([0, this.width]).padding(0.1);
+    this.y = d3.scaleLinear().rangeRound([this.height, 0]);
     this.x.domain(this.barData.map((d) => d.season));
-    this.y.domain([0, d3Array.max(this.barData, (d) => d.viewers)]);
+    this.y.domain([0, d3.max(this.barData, (d) => d.viewers)]);
   }
 
   drawAxes() {
     this.g.append('g')
       .attr('class', 'axis axis--x')
       .attr('transform', 'translate(0,' + this.height + ')')
-      .call(d3Axis.axisBottom(this.x))
+      .call(d3.axisBottom(this.x))
       .attr('font-size', '30');
     this.g.append('g')
       .attr('class', 'axis axis--y')
-      .call(d3Axis.axisLeft(this.y))
+      .call(d3.axisLeft(this.y))
       .append('text')
       .attr('class', 'axis-title')
       .attr('transform', 'rotate(-90)')
@@ -151,6 +152,61 @@ export class VoronoiComponent implements OnInit {
       .attr('y', (d) => this.y(d.viewers))
       .attr('width', this.x.bandwidth())
       .attr('height', (d) => this.height - this.y(d.viewers));
+  }
+
+
+  scatter(){
+    var margin = {top: 30, right: 20, bottom: 30, left: 50};
+    var width = 600 - margin.left - margin.right;
+    var height = 270 - margin.top - margin.bottom;
+    
+    var data = [{"admit_probability":54,"rank":20},
+            {"admit_probability":79,"rank":111},
+            {"admit_probability":70,"rank":68},
+            {"admit_probability":12,"rank":1},
+            {"admit_probability":197,"rank":87}];
+    var xscale = d3.scaleLinear()
+              .domain(d3.extent(data, function(d) { return +d.admit_probability; }))  
+              .range([0, width]);
+    var yscale = d3.scaleLinear()
+              .domain(d3.extent(data, function(d) { return +d.rank; }))
+              .range([height, 0]);
+    var xAxis = d3.axisBottom().scale(xscale);
+    var yAxis = d3.axisLeft().scale(yscale);
+    var svg = d3.select("#content-box").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    svg.selectAll("dot")
+    .data(data)
+    .enter().append("circle")
+    .attr("r", 3.5)
+    .attr("cx", function(d) { return xscale(+d.admit_probability); })
+    .attr("cy", function(d) { return yscale(+d.rank); });
+
+     svg.append("g")        
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
+    
+    svg.append("text")
+    .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.bottom) + ")")
+    .style("text-anchor", "middle")
+    .text("Average Acceptance");
+    
+    svg.append("g")        
+    .attr("class", "y axis")
+    .call(yAxis);
+    // Add the text label for the Y axis
+    svg.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - margin.left)
+    .attr("x",0 - (height / 2))
+    .attr("dy", "1em")
+    .style("text-anchor", "middle")
+    .text("Rank");
   }
 
 }
