@@ -3,6 +3,8 @@ import { ViewDidEnter } from '@ionic/angular';
 import * as L from 'leaflet';
 import { antPath } from 'leaflet-ant-path';
 //import { ElementRef } from '@angular/core';
+import { GoogleMap } from '@capacitor/google-maps';
+
 
 const iconRetinaUrl = 'assets/icon/my-icon.png';
 const iconUrl = 'assets/icon/my-icon.png';
@@ -28,6 +30,8 @@ L.Marker.prototype.options.icon = iconDefault;
 export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('map') mymap: ElementRef;
   map: L.Map;
+  apiKey = "AIzaSyBltjbC3PeZfQP59CaTvzaYuR15kcxHBeQ";
+
 
   constructor() { }
 
@@ -38,7 +42,49 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     console.log("here")
-    this.leafletMap()
+    //this.leafletMap()
+    this.googleMap()
+  }
+
+  async googleMap(){
+    const mapRef = document.getElementById('map');
+    const newMap = await GoogleMap.create({
+      id: 'my-map', // Unique identifier for this map instance
+      element: mapRef, // reference to the capacitor-google-map element
+      apiKey: this.apiKey, // Your Google Maps API Key
+      config: {
+        center: {
+          // The initial position to be rendered by the map
+          lat: 33.6,
+          lng: -117.9,
+        },
+        zoom: 8, // The initial zoom level to be rendered by the map
+      },
+    });
+    // Add a marker to the map
+    const markerId = await newMap.addMarker({
+      coordinate: {
+        lat: 33.6,
+        lng: -117.9
+      }
+    });
+
+    // Move the map programmatically
+    await newMap.setCamera({
+      coordinate: {
+        lat: 33.6,
+        lng: -117.9
+      }
+    });
+
+    // Enable marker clustering
+    await newMap.enableClustering();
+
+    // Handle marker click
+    await newMap.setOnMarkerClickListener((event) => {
+      console.log(event)
+    });
+
   }
 
 
@@ -116,7 +162,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /** Remove map when we have multiple map object */
   ngOnDestroy() {
+    //await newMap.destroy();
+
     //this.map.remove();
-  }
+  };
 
 }
