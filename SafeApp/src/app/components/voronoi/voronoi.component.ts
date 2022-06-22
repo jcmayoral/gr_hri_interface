@@ -11,7 +11,7 @@ import * as d3 from 'd3';
   styleUrls: ['./voronoi.component.scss'],
 })
 export class VoronoiComponent implements OnInit {
-  GRIDSIZE = 2;
+  GRIDSIZE = 50;
   JITTER = 0.5;
 
   //d3
@@ -43,12 +43,14 @@ export class VoronoiComponent implements OnInit {
 
   ngOnInit() {
     const points = this.generatePoints()
+    /*
     this.drawPoints(document.getElementById("map"), points);
     this.init();
     this.initAxes();
     this.drawAxes();
     this.drawChart();
-    this.scatter();
+    */
+    this.scatter(points);
   }
 
   generatePoints(){
@@ -57,7 +59,7 @@ export class VoronoiComponent implements OnInit {
       for (let y = 0; y <= this.GRIDSIZE; y++) {
         //points.push({x: x + this.JITTER * (Math.random() - Math.random()),
         //              y: y + this.JITTER * (Math.random() - Math.random())});
-        points.push({x: x*100 , y: y*100});
+        points.push({x: x , y: y});
       }
     }
     return points
@@ -155,21 +157,17 @@ export class VoronoiComponent implements OnInit {
   }
 
 
-  scatter(){
-    var margin = {top: 30, right: 20, bottom: 30, left: 50};
-    var width = 600 - margin.left - margin.right;
-    var height = 270 - margin.top - margin.bottom;
-    
-    var data = [{"admit_probability":54,"rank":20},
-            {"admit_probability":79,"rank":111},
-            {"admit_probability":70,"rank":68},
-            {"admit_probability":12,"rank":1},
-            {"admit_probability":197,"rank":87}];
+  scatter(data){
+    var margin = {top: 50, right: 50, bottom: -50, left: -50};
+    var width = this.width; //600 - margin.left - margin.right;
+    var height = this.height;//270 - margin.top - margin.bottom;
+    console.log("bbb", width, height)
+
     var xscale = d3.scaleLinear()
-              .domain(d3.extent(data, function(d) { return +d.admit_probability; }))  
+              .domain(d3.extent(data, function(d) { return +d.x; }))  
               .range([0, width]);
     var yscale = d3.scaleLinear()
-              .domain(d3.extent(data, function(d) { return +d.rank; }))
+              .domain(d3.extent(data, function(d) { return +d.y; }))
               .range([height, 0]);
     var xAxis = d3.axisBottom().scale(xscale);
     var yAxis = d3.axisLeft().scale(yscale);
@@ -183,18 +181,19 @@ export class VoronoiComponent implements OnInit {
     .data(data)
     .enter().append("circle")
     .attr("r", 3.5)
-    .attr("cx", function(d) { return xscale(+d.admit_probability); })
-    .attr("cy", function(d) { return yscale(+d.rank); });
+    .attr("cx", function(d) { console.log(xscale(+d.x)); return xscale(+d.x); })
+    .attr("cy", function(d) { console.log(yscale(+d.y)); return yscale(+d.y); });
+
 
      svg.append("g")        
     .attr("class", "x axis")
-    .attr("transform", "translate(0," + height + ")")
+    //.attr("transform", "translate(0," + height + ")")
     .call(xAxis);
     
     svg.append("text")
-    .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.bottom) + ")")
+    //.attr("transform", "translate(" + (width / 2) + " ," + (height + margin.bottom) + ")")
     .style("text-anchor", "middle")
-    .text("Average Acceptance");
+    .text("x");
     
     svg.append("g")        
     .attr("class", "y axis")
@@ -206,7 +205,9 @@ export class VoronoiComponent implements OnInit {
     .attr("x",0 - (height / 2))
     .attr("dy", "1em")
     .style("text-anchor", "middle")
-    .text("Rank");
+    .text("y");
+
+    console.log("finished")
   }
 
 }
