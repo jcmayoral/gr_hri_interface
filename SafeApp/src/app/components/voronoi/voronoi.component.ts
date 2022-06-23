@@ -11,8 +11,20 @@ import * as d3 from 'd3';
   styleUrls: ['./voronoi.component.scss'],
 })
 export class VoronoiComponent implements OnInit {
-  GRIDSIZE = 50;
+  GRIDSIZE = 5;
   JITTER = 0.5;
+
+
+  width: number;
+  height: number;
+  margin = { top: 20, right: 20, bottom: 30, left: 40 };
+  x: any;
+  y: any;
+  svg: any;
+  g: any;
+  link: any;
+  node: any;
+  simulation: any;
 
   //d3
   barData = [
@@ -27,13 +39,6 @@ export class VoronoiComponent implements OnInit {
   ];
   title = 'Game of Thrones';
   subtitle = 'Viewers per season for';
-  width: number;
-  height: number;
-  margin = { top: 20, right: 20, bottom: 30, left: 40 };
-  x: any;
-  y: any;
-  svg: any;
-  g: any;
 
 
   constructor() {
@@ -51,6 +56,7 @@ export class VoronoiComponent implements OnInit {
     this.drawChart();
     */
     this.scatter(points);
+    this.makeGraph()
   }
 
   generatePoints(){
@@ -208,6 +214,87 @@ export class VoronoiComponent implements OnInit {
     .text("y");
 
     console.log("finished")
+  }
+
+
+
+  makeGraph() {
+    var data = {
+      nodes: [
+        {name: 'node1', group: 1},
+        {name: 'node2', group: 2},
+        {name: 'node3', group: 2},
+        {name: 'node4', group: 3}
+      ],
+      links: [
+        {source: 2, target: 1, weight: 1},
+        {source: 0, target: 2, weight: 3}
+      ]
+    };
+    console.log("a")
+    this.dinit();
+    console.log("b")
+    this.initForce();
+    console.log("c")
+    this.initLinks(data);
+    console.log("d")
+    this.initNodes(data);
+    console.log("e")
+    this.function();
+  }
+
+  dinit() {
+  
+    this.svg = d3.select('#ggraph')
+      .append('svg')
+      .attr('width', '100%')
+      .attr('height', '100%')
+      .append("g")
+      .attr("transform", "translate(100, 100)");
+
+  }
+
+  initForce() {
+    /*
+    d3.layout.force()
+      .gravity(.05)
+      .distance(100)
+      .charge(-100)
+      .size([this.width, this.height]);
+    */
+  }
+  initLinks(data) {
+    this.link = this.svg.selectAll('.link')
+      .data(data.links)
+      .enter().append('line')
+      .attr('class', 'link')
+      // tslint:disable-next-line:only-arrow-functions
+      .style('stroke-width', function(d) { return Math.sqrt(d.weight); });
+
+  }
+  initNodes(data) {
+    this.node = this.svg.selectAll('.node')
+      .data(data.nodes)
+      .enter().append('g')
+      .attr('class', 'node')
+      .append('cicle').attr('r', '5')
+      // tslint:disable-next-line:only-arrow-functions
+      .append().attr('dx', 12).attr('dy', '.35em').text(function(d) { return d.name; });
+  }
+  function() {
+    this.link
+      // tslint:disable-next-line:only-arrow-functions
+      .attr('x1', function(d) { return d.source.x; })
+      // tslint:disable-next-line:only-arrow-functions
+      .attr('y1', function(d) { return d.source.y; })
+      // tslint:disable-next-line:only-arrow-functions
+      .attr('x2', function(d) { return d.target.x; })
+      // tslint:disable-next-line:only-arrow-functions
+      .attr('y2', function(d) { return d.target.y; });
+
+    this.node
+      // tslint:disable-next-line:only-arrow-functions
+      .attr('transform', function(d) { return 'translate(' + d.x + ',' + d.y + ')'; });
   }
 
 }

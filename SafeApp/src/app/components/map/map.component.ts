@@ -67,7 +67,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       },
     });
     // Add a marker to the map
-    const markerId = await newMap.addMarker({
+    const markerId = await this.newMap.addMarker({
       coordinate: {
         lat: 33.6,
         lng: -117.9
@@ -75,7 +75,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     // Move the map programmatically
-    await newMap.setCamera({
+    await this.newMap.setCamera({
       coordinate: {
         lat: 33.6,
         lng: -117.9
@@ -83,10 +83,10 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     // Enable marker clustering
-    await newMap.enableClustering();
+    await this.newMap.enableClustering();
 
     // Handle marker click
-    await newMap.setOnMarkerClickListener((event) => {
+    await this.newMap.setOnMarkerClickListener((event) => {
       console.log(event)
     });
 
