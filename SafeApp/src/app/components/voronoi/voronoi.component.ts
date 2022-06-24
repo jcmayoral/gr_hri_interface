@@ -49,14 +49,6 @@ export class VoronoiComponent implements OnInit {
   ngOnInit() {
     const points = this.generatePoints()
     console.log("a")
-    /*
-    this.drawPoints(document.getElementById("mycanvas"), points);
-    console.log("a")
-    this.init();
-    this.initAxes();
-    this.drawAxes();
-    this.drawChart();
-    */
     this.scatter(points);
   }
 
@@ -71,98 +63,6 @@ export class VoronoiComponent implements OnInit {
     }
     return points
   }
-
-  drawPoints(canvas, points) {
-    var heightRatio = 10;
-    canvas.height = 300;//canvas.height * heightRatio
-    canvas.width= 300;//canvas.width * heightRatio
-    let ctx = canvas.getContext('2d');
-    ctx.save();
-
-    
-    //ctx.fillStyle = "hsl(0, 50%, 50%)";
-    ctx.font = '0.3px serif';
-    ctx.fillStyle = "#ff0000"; //<======= here
-    var lastpoint =[0,0]
-    ctx.lineWidth =0.5;
-
-    for (let {x, y} of points) {
-        ctx.beginPath();
-        ctx.arc(x, y, 0.1, 0, 2*Math.PI);
-        ctx.fill();
-        ctx.fillText("hello",x,y)
-        //ctx.endPath()
-        // Connects the current point to the next
-        ctx.beginPath();
-        ctx.moveTo(lastpoint[0], lastpoint[1]);
-        ctx.lineTo(x, y);
-        ctx.stroke();
-        lastpoint = [x,y]
-        console.log(x,y, lastpoint)
-
-    }
-    ctx.closePath()
-
-    ctx.beginPath();
-    ctx.rect(0, 0, 5, 5);
-    ctx.strokeStyle = 'red';
-    ctx.stroke();
-    ctx.closePath();
-
-    //ctx.scale(200,200);
-
-    ctx.restore();    
-  }
-  init() {
-    this.svg = d3.select('#barChart')
-      .append('svg')
-      .attr('width', '100%')
-      .attr('height', '100%')
-      .attr('viewBox', '0 0 900 500');
-    this.g = this.svg.append('g')
-      .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
-  }
-
-  initAxes() {
-    this.x = d3.scaleBand().rangeRound([0, this.width]).padding(0.1);
-    this.y = d3.scaleLinear().rangeRound([this.height, 0]);
-    this.x.domain(this.barData.map((d) => d.season));
-    this.y.domain([0, d3.max(this.barData, (d) => d.viewers)]);
-  }
-
-  drawAxes() {
-    this.g.append('g')
-      .attr('class', 'axis axis--x')
-      .attr('transform', 'translate(0,' + this.height + ')')
-      .call(d3.axisBottom(this.x))
-      .attr('font-size', '30');
-    this.g.append('g')
-      .attr('class', 'axis axis--y')
-      .call(d3.axisLeft(this.y))
-      .append('text')
-      .attr('class', 'axis-title')
-      .attr('transform', 'rotate(-90)')
-      .attr('y', 6)
-      .attr('dy', '0.71em')
-      .attr('text-anchor', 'end')
-      .attr('fill', 'rgb(34, 167, 240)')
-      .attr('font-size', '50')
-      .text('viewers');
-  }
-
-  drawChart() {
-    this.g.selectAll('.bar')
-      .data(this.barData)
-      .enter()
-      .append('rect')
-      .attr('class', 'bar')
-      .attr('fill', 'rgb(34, 167, 240)')
-      .attr('x', (d) => this.x(d.season))
-      .attr('y', (d) => this.y(d.viewers))
-      .attr('width', this.x.bandwidth())
-      .attr('height', (d) => this.height - this.y(d.viewers));
-  }
-
 
   scatter(data){
     var margin = {top: 50, right: 50, bottom: -50, left: -50};
@@ -221,7 +121,7 @@ export class VoronoiComponent implements OnInit {
             return xscale(d.x);
         })
         .y(function(d) {
-            console.log(d.y, "")
+            console.log(d.y, "y")
             return yscale(d.y);
         });
 
