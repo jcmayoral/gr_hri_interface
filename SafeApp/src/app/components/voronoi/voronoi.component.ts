@@ -42,8 +42,8 @@ export class VoronoiComponent implements OnInit {
 
 
   constructor() {
-    this.width = 200 - this.margin.left - this.margin.right;
-    this.height = 200 - this.margin.top - this.margin.bottom;
+    this.width = 500 - this.margin.left - this.margin.right;
+    this.height = 300 - this.margin.top - this.margin.bottom;
   }
 
   ngOnInit() {
@@ -58,7 +58,7 @@ export class VoronoiComponent implements OnInit {
       for (let y = 0; y <= 5; y++) {
         //points.push({x: x + this.JITTER * (Math.random() - Math.random()),
           //            y: y + this.JITTER * (Math.random() - Math.random())});
-        points.push({x: x +this.JITTER*50 , y: y+this.JITTER*50});
+        points.push({x: x, y: y});
       }
     }
     return points
@@ -125,12 +125,19 @@ export class VoronoiComponent implements OnInit {
             return yscale(d.y);
         });
 
-
-    var data2=[{x:1, y:2}, {x:4, y:3}, {x:1, y:2}, {x:4, y:3}]
+    /*
     svg.append("path")
     .datum(data)
     .attr("class", "line")
     .attr("d", line);
-
+    */
+    svg.selectAll("dot")
+    .data(data)
+    .enter().append("rect")
+    .attr("class", "bar")
+    .attr("x", function(d) { return xscale(d.x); })
+    .attr("width", 1)
+    .attr("y", function(d) { return yscale(d.y); })
+    .attr("height", function(d) { return height - yscale(d.y); });
   }
 }
