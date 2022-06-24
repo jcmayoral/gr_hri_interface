@@ -11,8 +11,8 @@ import * as d3 from 'd3';
   styleUrls: ['./voronoi.component.scss'],
 })
 export class VoronoiComponent implements OnInit {
-  GRIDSIZE = 5;
-  JITTER = 0.5;
+  GRIDSIZE = 50;
+  JITTER = 0;
 
 
   width: number;
@@ -42,40 +42,40 @@ export class VoronoiComponent implements OnInit {
 
 
   constructor() {
-    this.width = 900 - this.margin.left - this.margin.right;
-    this.height = 500 - this.margin.top - this.margin.bottom;
+    this.width = 200 - this.margin.left - this.margin.right;
+    this.height = 200 - this.margin.top - this.margin.bottom;
   }
 
   ngOnInit() {
     const points = this.generatePoints()
+    console.log("a")
     /*
-    this.drawPoints(document.getElementById("map"), points);
+    this.drawPoints(document.getElementById("mycanvas"), points);
+    console.log("a")
     this.init();
     this.initAxes();
     this.drawAxes();
     this.drawChart();
     */
     this.scatter(points);
-    this.makeGraph()
   }
 
   generatePoints(){
     let points = [];
-    for (let x = 0; x <= this.GRIDSIZE; x++) {
-      for (let y = 0; y <= this.GRIDSIZE; y++) {
+    for (let x = 0; x <= 5; x++) {
+      for (let y = 0; y <= 5; y++) {
         //points.push({x: x + this.JITTER * (Math.random() - Math.random()),
-        //              y: y + this.JITTER * (Math.random() - Math.random())});
-        points.push({x: x , y: y});
+          //            y: y + this.JITTER * (Math.random() - Math.random())});
+        points.push({x: x +this.JITTER*50 , y: y+this.JITTER*50});
       }
     }
     return points
   }
 
   drawPoints(canvas, points) {
-    var heightRatio = 1.5;
-    canvas.height = canvas.height * heightRatio
-    canvas.width= canvas.width * heightRatio
-
+    var heightRatio = 10;
+    canvas.height = 300;//canvas.height * heightRatio
+    canvas.width= 300;//canvas.width * heightRatio
     let ctx = canvas.getContext('2d');
     ctx.save();
 
@@ -98,12 +98,13 @@ export class VoronoiComponent implements OnInit {
         ctx.lineTo(x, y);
         ctx.stroke();
         lastpoint = [x,y]
+        console.log(x,y, lastpoint)
 
     }
     ctx.closePath()
 
     ctx.beginPath();
-    ctx.rect(0, 0, 300, 200);
+    ctx.rect(0, 0, 5, 5);
     ctx.strokeStyle = 'red';
     ctx.stroke();
     ctx.closePath();
@@ -167,7 +168,7 @@ export class VoronoiComponent implements OnInit {
     var margin = {top: 50, right: 50, bottom: -50, left: -50};
     var width = this.width; //600 - margin.left - margin.right;
     var height = this.height;//270 - margin.top - margin.bottom;
-    console.log("bbb", width, height)
+    //console.log("bbb", width, height)
 
     var xscale = d3.scaleLinear()
               .domain(d3.extent(data, function(d) { return +d.x; }))  
@@ -183,24 +184,15 @@ export class VoronoiComponent implements OnInit {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    svg.selectAll("dot")
-    .data(data)
-    .enter().append("circle")
-    .attr("r", 3.5)
-    .attr("cx", function(d) { console.log(xscale(+d.x)); return xscale(+d.x); })
-    .attr("cy", function(d) { console.log(yscale(+d.y)); return yscale(+d.y); });
 
-
-     svg.append("g")        
-    .attr("class", "x axis")
-    //.attr("transform", "translate(0," + height + ")")
-    .call(xAxis);
-    
+    svg.append("g")        
+    .attr("class", "x axis").call(xAxis);
+//    .attr("transform", "translate(0," + height + ")")
     svg.append("text")
     //.attr("transform", "translate(" + (width / 2) + " ," + (height + margin.bottom) + ")")
     .style("text-anchor", "middle")
     .text("x");
-    
+  
     svg.append("g")        
     .attr("class", "y axis")
     .call(yAxis);
@@ -213,88 +205,32 @@ export class VoronoiComponent implements OnInit {
     .style("text-anchor", "middle")
     .text("y");
 
-    console.log("finished")
-  }
+
+    svg.selectAll("dot")
+    .data(data)
+    .enter().append("circle")
+    .attr("r", 3.5)
+    .attr("cx", function(d) { return xscale(+d.x); })
+    .attr("cy", function(d) { return yscale(+d.y); })
+    .attr("fill", "#69b3a2")
 
 
+    var line = d3.line()
+        .x(function(d) {
+            console.log(d.x)
+            return xscale(d.x);
+        })
+        .y(function(d) {
+            console.log(d.y, "")
+            return yscale(d.y);
+        });
 
-  makeGraph() {
-    var data = {
-      nodes: [
-        {name: 'node1', group: 1},
-        {name: 'node2', group: 2},
-        {name: 'node3', group: 2},
-        {name: 'node4', group: 3}
-      ],
-      links: [
-        {source: 2, target: 1, weight: 1},
-        {source: 0, target: 2, weight: 3}
-      ]
-    };
-    console.log("a")
-    this.dinit();
-    console.log("b")
-    this.initForce();
-    console.log("c")
-    this.initLinks(data);
-    console.log("d")
-    this.initNodes(data);
-    console.log("e")
-    this.function();
-  }
 
-  dinit() {
-  
-    this.svg = d3.select('#ggraph')
-      .append('svg')
-      .attr('width', '100%')
-      .attr('height', '100%')
-      .append("g")
-      .attr("transform", "translate(100, 100)");
+    var data2=[{x:1, y:2}, {x:4, y:3}, {x:1, y:2}, {x:4, y:3}]
+    svg.append("path")
+    .datum(data)
+    .attr("class", "line")
+    .attr("d", line);
 
   }
-
-  initForce() {
-    /*
-    d3.layout.force()
-      .gravity(.05)
-      .distance(100)
-      .charge(-100)
-      .size([this.width, this.height]);
-    */
-  }
-  initLinks(data) {
-    this.link = this.svg.selectAll('.link')
-      .data(data.links)
-      .enter().append('line')
-      .attr('class', 'link')
-      // tslint:disable-next-line:only-arrow-functions
-      .style('stroke-width', function(d) { return Math.sqrt(d.weight); });
-
-  }
-  initNodes(data) {
-    this.node = this.svg.selectAll('.node')
-      .data(data.nodes)
-      .enter().append('g')
-      .attr('class', 'node')
-      .append('cicle').attr('r', '5')
-      // tslint:disable-next-line:only-arrow-functions
-      .append().attr('dx', 12).attr('dy', '.35em').text(function(d) { return d.name; });
-  }
-  function() {
-    this.link
-      // tslint:disable-next-line:only-arrow-functions
-      .attr('x1', function(d) { return d.source.x; })
-      // tslint:disable-next-line:only-arrow-functions
-      .attr('y1', function(d) { return d.source.y; })
-      // tslint:disable-next-line:only-arrow-functions
-      .attr('x2', function(d) { return d.target.x; })
-      // tslint:disable-next-line:only-arrow-functions
-      .attr('y2', function(d) { return d.target.y; });
-
-    this.node
-      // tslint:disable-next-line:only-arrow-functions
-      .attr('transform', function(d) { return 'translate(' + d.x + ',' + d.y + ')'; });
-  }
-
 }
