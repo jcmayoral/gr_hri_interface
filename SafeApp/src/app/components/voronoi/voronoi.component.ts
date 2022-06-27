@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {RequestsService} from '../../services/requests.service'
 
 import * as d3 from 'd3';
 //import * as d3Scale from 'd3-scale';
@@ -14,13 +15,23 @@ export class VoronoiComponent implements OnInit {
   x: any;
   y: any;
   svg: any;
-  constructor() {
+  constructor(private req: RequestsService) {
   }
 
-  ngOnInit() {
-    const points = this.generatePoints()
-    console.log("a")
-    this.scatter(points);
+
+  async loadPoints(){
+    console.log("start")
+    const response = await this.req.get("get_topomap/");
+    console.log("response", response.data)
+    let points = []
+    //return await response.data
+    response.data.points.forEach(element => {
+      var e = {x: element.x, y: element.y}
+      console.log(e)
+      points.push(e)
+    });
+    console.log("after response", points)
+    return await points
   }
 
   generatePoints(){
@@ -33,9 +44,16 @@ export class VoronoiComponent implements OnInit {
     return points
   }
 
+  async ngOnInit() {
+    //await this.loadPoints()
+    const points = await this.loadPoints()
+    console.log("a", points)
+    this.scatter(points);
+  }
+
   scatter(data){
-    var margin = {top: 20, right: 0, bottom: 60, left: 0};
-    var width = 100 - margin.left - margin.right;
+    var margin = {top: 50, right: 50, bottom: 50, left: 50};
+    var width = 500 - margin.left - margin.right;
     var height = 200 - margin.top - margin.bottom;
     //console.log("bbb", width, height)
 
@@ -101,6 +119,8 @@ export class VoronoiComponent implements OnInit {
     .attr("class", "line")
     .attr("d", line);
     */
+
+    /*
     svg.selectAll("dot")
     .data(data)
     .enter().append("rect")
@@ -109,5 +129,6 @@ export class VoronoiComponent implements OnInit {
     .attr("width", 1)
     .attr("y", function(d) { return yscale(d.y); })
     .attr("height", function(d) { return height - yscale(d.y); });
+    */
   }
 }
