@@ -23,21 +23,13 @@ export class VoronoiComponent implements OnInit {
     console.log("start")
     const response = await this.req.get("get_topomap/");
     console.log("response", response.data)
-    let points = []
-    //return await response.data
-    response.data.points.forEach(element => {
-      var e = {x: element.x, y: element.y}
-      console.log(e)
-      points.push(e)
-    });
-    console.log("after response", points)
-    return await points
+    return await response.data
   }
 
-  generatePoints(){
+  generateFakePoints(){
     let points = [];
-    for (let x = 0; x <= 5; x++) {
-      for (let y = 0; y <= 5; y++) {
+    for (let x = 0; x <= 3; x++) {
+      for (let y = 0; y <= 1; y++) {
         points.push({x: x, y: y});
       }
     }
@@ -45,16 +37,19 @@ export class VoronoiComponent implements OnInit {
   }
 
   async ngOnInit() {
-    //await this.loadPoints()
     const points = await this.loadPoints()
     console.log("a", points)
     this.scatter(points);
   }
 
-  scatter(data){
-    var margin = {top: 50, right: 50, bottom: 50, left: 50};
+  scatter(alldata){
+    const data = alldata.points;
+    const edges = alldata.edges;
+    const m= 120;
+    const m2 = 30;
+    var margin = {top: m2, right: m, bottom: m2, left: m};
     var width = 500 - margin.left - margin.right;
-    var height = 200 - margin.top - margin.bottom;
+    var height = 120 - margin.top - margin.bottom;
     //console.log("bbb", width, height)
 
     var xscale = d3.scaleLinear()
@@ -95,40 +90,42 @@ export class VoronoiComponent implements OnInit {
     */
 
     svg.selectAll("dot")
-    .data(data)
+    .data(edges)
     .enter().append("circle")
     .attr("r", 3.5)
     .attr("cx", function(d) { return xscale(+d.x); })
     .attr("cy", function(d) { return yscale(+d.y); })
     .attr("fill", "#69b3a2")
 
+    console.log(edges.length, "edges")
+    var e0 = edges[0]
+    for (let e=-1; e<=edges.lenght; e++){
+      console.log("e", e)
+      var edg = []
+      edg.push(e0)
+      edg.push(edges[e])
+      console.log(e)
+      svg.append("path")
+      .datum(edg)
+      .attr("class", "line")
+      .attr("fill", "none")
+      .attr("stroke", "steelblue")
+      .attr("stroke-width", 1.5)
+      .attr("d", d3.line()
+        .x(function(d) { return xscale(d.x) })
+        .y(function(d) { return yscale(d.y) })
+      )  
+    }
 
-    var line = d3.line()
-        .x(function(d) {
-            console.log(d.x)
-            return xscale(d.x);
-        })
-        .y(function(d) {
-            console.log(d.y, "y")
-            return yscale(d.y);
-        });
 
-    /*
-    svg.append("path")
-    .datum(data)
-    .attr("class", "line")
-    .attr("d", line);
-    */
 
-    /*
     svg.selectAll("dot")
-    .data(data)
+    .data(edges)
     .enter().append("rect")
     .attr("class", "bar")
     .attr("x", function(d) { return xscale(d.x); })
     .attr("width", 1)
     .attr("y", function(d) { return yscale(d.y); })
-    .attr("height", function(d) { return height - yscale(d.y); });
-    */
+    .attr("height", function(d) { return height+yscale(+d.y); });
   }
 }
