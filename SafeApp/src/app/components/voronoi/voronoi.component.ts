@@ -23,7 +23,17 @@ export class VoronoiComponent implements OnInit {
     console.log("start")
     const response = await this.req.get("get_topomap/");
     console.log("response", response.data)
-    return await response.data
+
+    let points_dict = {}
+
+    for (let p of response.data.points){
+      console.log("p", p.x)
+      points_dict[p.name] = {}
+      points_dict[p.name]["x"] = p.x; 
+      points_dict[p.name]["y"] = p.y;
+    }
+
+    return await [response.data, points_dict]
   }
 
   generateFakePoints(){
@@ -38,18 +48,19 @@ export class VoronoiComponent implements OnInit {
 
   async ngOnInit() {
     const points = await this.loadPoints()
-    console.log("a", points)
+    console.log("a", points[0])
     this.scatter(points);
   }
 
   scatter(alldata){
-    const data = alldata.points;
-    const edges = alldata.edges;
-    const m= 120;
-    const m2 = 30;
+    const data = alldata[0].points;
+    console.log("points ", data.length)
+    const edges = alldata[0].edges;
+    const m= 10;
+    const m2 = 50;
     var margin = {top: m2, right: m, bottom: m2, left: m};
-    var width = 500 - margin.left - margin.right;
-    var height = 120 - margin.top - margin.bottom;
+    var width = 400 - margin.left - margin.right;
+    var height = 100 - margin.top - margin.bottom;
     //console.log("bbb", width, height)
 
     var xscale = d3.scaleLinear()
@@ -98,13 +109,23 @@ export class VoronoiComponent implements OnInit {
     .attr("fill", "#69b3a2")
 
     console.log(edges.length, "edges")
-    var e0 = edges[0]
-    for (let e=-1; e<=edges.lenght; e++){
-      console.log("e", e)
+    var edges_length = edges.length -1
+
+    console.log(edges)
+
+    for (var e=0; e<=edges_length; e++){
       var edg = []
+      console.log("jose", edges[e])
+      var e0 = {
+        x: alldata[1][edges[e].start].x,
+        y: alldata[1][edges[e].start].y
+      }
+      var e1 = {
+        x: alldata[1][edges[e].goal].x,
+        y: alldata[1][edges[e].goal].y
+      }
       edg.push(e0)
-      edg.push(edges[e])
-      console.log(e)
+      edg.push(e1)
       svg.append("path")
       .datum(edg)
       .attr("class", "line")
@@ -115,10 +136,11 @@ export class VoronoiComponent implements OnInit {
         .x(function(d) { return xscale(d.x) })
         .y(function(d) { return yscale(d.y) })
       )  
+      e0 = edges[e]
     }
 
 
-
+    /*
     svg.selectAll("dot")
     .data(edges)
     .enter().append("rect")
@@ -127,5 +149,6 @@ export class VoronoiComponent implements OnInit {
     .attr("width", 1)
     .attr("y", function(d) { return yscale(d.y); })
     .attr("height", function(d) { return height+yscale(+d.y); });
+    */
   }
 }
