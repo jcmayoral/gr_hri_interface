@@ -15,7 +15,11 @@ export class VoronoiComponent implements OnInit {
   x: any;
   y: any;
   svg: any;
+  node_selection:string 
+  list_nodes
+
   constructor(private req: RequestsService) {
+    this.list_nodes = [];
   }
 
 
@@ -31,6 +35,7 @@ export class VoronoiComponent implements OnInit {
       points_dict[p.name] = {}
       points_dict[p.name]["x"] = p.x; 
       points_dict[p.name]["y"] = p.y;
+      this.list_nodes.push(p.name)
     }
 
     return await [response.data, points_dict]
@@ -76,6 +81,10 @@ export class VoronoiComponent implements OnInit {
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    svg.onmouseWheel = function(e){
+      console.log("aaa")
+    }
 
     
     /*
