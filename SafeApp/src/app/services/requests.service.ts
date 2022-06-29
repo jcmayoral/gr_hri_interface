@@ -30,6 +30,11 @@ export class RequestsService {
     //this.get("/users/me")
   }
 
+  async publish_speed(){
+    return await this.post3("speed/", {"vel_x": 1.0, "vel_y": 0.2, "vel_z": 3.0})
+    //this.get("/users/me")
+  }
+
   async get(route: string){
     console.log("get "+ this.endpoint+route)
 
@@ -76,7 +81,7 @@ export class RequestsService {
         'Content-Type': 'application/json',
         'Authorization': 'Basic am9zZToxMjM0' //+ 'jose:1234'
       },
-      data: JSON.stringify({lock: 1})
+      data: JSON.stringify(msg)
     }).catch(function(error){
       alert(error)
     });
