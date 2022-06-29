@@ -30,8 +30,9 @@ export class RequestsService {
     //this.get("/users/me")
   }
 
-  async publish_speed(){
-    return await this.post3("speed/", {"vel_x": 1.0, "vel_y": 0.2, "vel_z": 3.0})
+  async publish_speed(x,z){
+    console.log(x,z)
+    return await this.post3("speed/", {"vel_x": x, "vel_y": 0.2, "vel_z": z})
     //this.get("/users/me")
   }
 

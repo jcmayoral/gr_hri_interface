@@ -33,6 +33,7 @@ export class Tab1Page implements OnInit{
 
   setup(){
     const func = this.req;
+    const size = this.size;
     this.manager.on('added', function (evt, nipple) {
       nipple.on('start move end dir plain', function (evt) {
           // DO EVERYTHING
@@ -45,8 +46,8 @@ export class Tab1Page implements OnInit{
     });
 
     this.manager.on("move", async function(evt, data){
-      console.log("move", data.angle, data.position, data.dir, evt)
-      func.publish_speed()
+      console.log("move", data.angle, data.position, data.distance, evt)
+      func.publish_speed(data.distance/size, data.angle.degree/360)
     })
     /*
     this.manager.on('added', function (evt, nipple) {
