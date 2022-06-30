@@ -11,7 +11,9 @@ import {Http} from '@capacitor-community/http'
 
 export class RequestsService {
   //endpoint = 'http://192.168.1.67:8000/'
+  //endpoint = 'http://201.137.167.207/'
   endpoint = 'http://grassrobotics.sytes.net/'
+
   //endpoint = "https://jselkj.deta.dev/"
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json',
