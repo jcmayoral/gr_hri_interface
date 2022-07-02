@@ -61,11 +61,11 @@ export class VoronoiComponent implements OnInit {
     const data = alldata[0].points;
     console.log("points ", data.length)
     const edges = alldata[0].edges;
-    const m= 10;
-    const m2 = 50;
+    const m= 3;
+    const m2 = -2;
     var margin = {top: m2, right: m, bottom: m2, left: m};
-    var width = 400 - margin.left - margin.right;
-    var height = 100 - margin.top - margin.bottom;
+    var width = 100;// - margin.left - margin.right;
+    var height = 120;// - margin.top - margin.bottom;
     //console.log("bbb", width, height)
 
     var xscale = d3.scaleLinear()
