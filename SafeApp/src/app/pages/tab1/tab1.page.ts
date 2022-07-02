@@ -49,11 +49,12 @@ export class Tab1Page implements OnInit{
       console.log("move", data.angle, data.position, data.distance, evt)
       const response = await func.publish_speed(data.distance/size, data.angle.degree/360)
       var image = document.getElementById("feedback") as HTMLImageElement;
-
-      if (image!= null){
-        image.src = 'data:image/png;base64'+btoa(response.body);
+      
+      if (image!= null && response!=null){
+        
+        image.src = 'data:image/jpeg;png,'+encodeURI(response["data"]);  
       }
-      console.log(response, image)
+      console.log(encodeURI(response["data"]))
     })
     /*
     this.manager.on('added', function (evt, nipple) {

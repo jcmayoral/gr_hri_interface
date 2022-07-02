@@ -12,7 +12,8 @@ export class RequestsService {
   //endpoint = 'http://192.168.1.67:8000/'
   endpoint = 'http://grassrobotics.sytes.net:8000/'
   //TODO website is not working again
-  //endpoint = 'http://201.137.167.207/'
+  //endpoint = 'http://http://201.137.141.171:8000/'
+
 
   //endpoint = "https://jselkj.deta.dev/"
   /*
