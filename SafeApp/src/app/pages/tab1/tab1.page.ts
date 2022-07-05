@@ -57,16 +57,15 @@ export class Tab1Page implements OnInit{
       //this.call()
     });
     */
+
     
     this.manager.on("move", async function(evt, data){
       console.log(this)
-      console.log("move", data.angle, data.position, data.distance, evt, this.speed)
+      //console.log("move", data.angle, data.position, data.distance, evt, this.speed)
       const response = await func.publish_speed(data.distance/size, data.angle.degree/360)
       //this.speed.vel_x = data.distance/size;
       //this.updateImage()
     })
-
-    console.log("my move", this.manager.get(0))
     
     /*
     this.manager.on('added', function (evt, nipple) {
@@ -75,18 +74,24 @@ export class Tab1Page implements OnInit{
       console.log(nipple.raw, nipple.vector)
     })
     */
-   this.timer = setTimeout(
-    () => {
-      const e = Date.now();
-      console.log('Timer End', e);
-      this.updateImage()
-    },
-    1000
-  );
+   this.StartTimer()
   }
+
+  maxtime: any=30
+
+  StartTimer(){
+    this.timer = setTimeout(x => 
+      {
+        console.log("timer")
+        this.updateImage()
+        this.StartTimer();
+      }, 2000);
+ 
+
+  }
+   
   
   async lock(){
-    this.updateImage()
     console.log(this.speed.vel_x, this.speed.vel_y)
     this.speed.vel_x = 2.0
     console.log("lock")
@@ -97,15 +102,16 @@ export class Tab1Page implements OnInit{
   updateImage(){
     console.log("update")
     var image = document.getElementById("feedback") as HTMLImageElement;
-    console.log(image, image.src)
+    console.log(image, image.complete)
     if(image.complete) {
         var new_image = new Image();
         //set up the new image
         new_image.id = "feedback";
-        new_image.src = image.src + '?_=' + new Date().getMilliseconds();           
+        image.src = image.src + '?_=' + new Date().getMilliseconds();         
+        console.log("a")  
         // insert new image and remove old
-        image.parentNode.insertBefore(new_image,image);
-        image.parentNode.removeChild(image);
+        //image.parentNode.insertBefore(new_image,image);
+        //image.parentNode.removeChild(image);
     }
   }
 }

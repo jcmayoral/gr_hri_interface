@@ -41,7 +41,7 @@ export class RequestsService {
   }
 
   async get(route: string){
-    console.log("get "+ this.endpoint+route)
+    console.log("get from "+ this.endpoint+route)
     const rawResponse = await Http.get({
       url: this.endpoint+route,
       method: 'GET',
@@ -63,7 +63,7 @@ export class RequestsService {
   }
 
   async post3(route:string, msg:any){
-    console.log("post 3")
+    console.log("post function")
     const rawResponse = await Http.post({
       url: this.endpoint+route,
       method: 'POST',
