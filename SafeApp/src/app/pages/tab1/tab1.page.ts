@@ -75,9 +75,14 @@ export class Tab1Page implements OnInit{
       console.log(nipple.raw, nipple.vector)
     })
     */
-   this.timer = setTimeout(function(){
-    console.log("timeout")
-    }, 1)
+   this.timer = setTimeout(
+    () => {
+      const e = Date.now();
+      console.log('Timer End', e);
+      this.updateImage()
+    },
+    1000
+  );
   }
   
   async lock(){
