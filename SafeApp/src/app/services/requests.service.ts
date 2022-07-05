@@ -9,13 +9,12 @@ import {Http} from '@capacitor-community/http'
 
 
 export class RequestsService {
-  endpoint = 'http://localhost:8000/'
   //endpoint = 'http://grassrobotics.sytes.net:8000/'
   //TODO website is not working again
   //endpoint = 'http://http://201.137.141.171:8000/'
   //endpoint = 'http://localhost:8000/'
 
-  //endpoint = "https://jselkj.deta.dev/"
+  endpoint = "https://jselkj.deta.dev/"
   /*
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json',
