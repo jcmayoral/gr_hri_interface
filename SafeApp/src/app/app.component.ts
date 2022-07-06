@@ -8,8 +8,20 @@ import { HapticsService } from './services/haptics.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+  timer: any;
   constructor(private haptics: HapticsService) {
     console.log("haptics main")
-    this.haptics.hapticsImpactLight()
+    this.StartTimer()
+  }
+
+  StartTimer(){
+    this.timer = setTimeout(x => 
+      {
+        console.log("main timer")
+        this.haptics.hapticsImpactLight()
+        this.StartTimer();
+      }, 2000);
+ 
+
   }
 }

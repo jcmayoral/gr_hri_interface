@@ -47,7 +47,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     console.log("here")
-    //this.leafletMap()
+    this.leafletMap()
     this.googleMap()
   }
 
@@ -184,6 +184,22 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     L.marker([9.402069, -99.171121]).addTo(this.map);
     var marker2 = new L.Marker(new L.LatLng(19.402069, -99.171131));
     //this.map.addLayer(marker2).bindPopup('Map Frame').openPopup();
+    this.renderMap()
+  }
+  private renderMap(){
+    const observer = new MutationObserver(() => {
+      console.log('init mutation');
+      this.map.invalidateSize();
+      observer.disconnect();
+      console.log('cancel observer');
+    });
+    console.log('init observer');
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+      childList: false,
+      characterData: false,
+    });
   }
 
   /** Remove map when we have multiple map object */
