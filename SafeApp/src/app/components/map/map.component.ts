@@ -181,14 +181,20 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       { color: '#FFFF00', weight: 5, opacity: 1.0 })
       .addTo(this.map);
 
-    const moptions = {title:"WP1", alt:"alt", riseOnHover:true, dragable:true}
-    L.marker(house, moptions).addTo(this.map);
+    const moptions = {title:"WP1", alt:"alt", riseOnHover:true, dragable:true, nohide: true}
+    L.marker(house, moptions).bindTooltip('marker1').addTo(this.map).openTooltip();
+    L.marker(point2, moptions).bindTooltip('marker2').addTo(this.map).openTooltip();
+
+    /*
+    var popup = L.popup()
+    .setLatLng(house)
+    .setContent('<p>Hello world!<br />This is a nice popup.</p>')
+    .openOn(this.map);
+    */
     //var bounds = this.map.getBounds();
     //this.map.setView([19.402059, -99.171121], 10);
     //marker.addTo(this.map);
     //L.marker(point2).addTo(this.map);
-    var marker2 = new L.Marker(new L.LatLng(point2[0], point2[1]), moptions);
-    this.map.addLayer(marker2)
     this.renderMap()
   }
   private renderMap(){
