@@ -22,7 +22,7 @@ const iconDefault = L.icon({
   shadowSize: [41, 41]
 });
 
-L.Marker.prototype.options.icon = iconDefault;
+//L.Marker.prototype.options.icon = iconDefault;
 
 @Component({
   selector: 'app-map',
@@ -48,7 +48,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     console.log("here")
     this.leafletMap()
-    this.googleMap()
+    //this.googleMap()
   }
 
   async googleMap(){
@@ -77,11 +77,10 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     // Move the map programmatically
     await this.newMap.setCamera({
       coordinate: {
-        lat: 33.6,
+        lat: 33.2,
         lng: -117.9
       }
-    });
-
+    }).then((a)=>{console.log("set camera")});
     // Enable marker clustering
     await this.newMap.enableClustering();
 
@@ -127,7 +126,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       [19.397391, -99.182275],
       [19.403516, -99.167656]
     ];
-    console.log("aaaN", this.map, this.mymap)
 
     var url = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
     //original 
@@ -140,31 +138,36 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     //  }).addTo(this.map), 10000
     //)
 
-    const roads = await L.tileLayer(url, {
+    const house = [19.397507, -99.161707]
+    const point2 = [19.388073, -99.182993]
+
+    
+    //var streets = L.tileLayer(url, {id: 'mapbox/streets-v11', tileSize: 512, zoomOffset: -1});
+
+    this.map = L.map("map2",{
+      zoomControl: true,
+      autopan: true,
+      center: L.latLng(house[0], house[1]),
+      }
+    )
+
+    console.log("aaaN", this.map)
+
+    
+    await L.tileLayer(url, {
       //maxZoom: 80,
       zoom: 5,
       //attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    });
-    var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '© OpenStreetMap'
-    });
-
-    var streets = L.tileLayer(url, {id: 'mapbox/streets-v11', tileSize: 512, zoomOffset: -1});
+    }).addTo(this.map);
 
     
-    this.map = L.map("map2",{
-      layers:[streets],
-      zoomControl: false}
-    )
-    
-    this.map.fitBounds(bounds)
-
+    //this decenters
+    //this.map.fitBounds(bounds)
 
     //this.map.dragging.disable()
-    this.map.setView([19.402069, -99.171111],12);
+    this.map.setView(house,15);
 
-    /*
+    
     this.map.whenReady(() => {
       setTimeout(() => {
         this.map.invalidateSize();
@@ -172,18 +175,19 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       }, 1000);
     });
 
-    antPath([[19.397391, -99.182275], [34.1526, 77.5771]],
-      { color: '#FFFF00', weight: 50, opacity: 1.0 })
-      .addTo(this.map);
-    */
 
-    var marker = L.marker([19.402069, -99.171111])
+    
+    antPath(([house, point2]),
+      { color: '#FFFF00', weight: 5, opacity: 1.0 })
+      .addTo(this.map);
+
+    L.marker(house).addTo(this.map);
     //var bounds = this.map.getBounds();
-    this.map.setView([19.402069, -99.171111], 10);
+    //this.map.setView([19.402059, -99.171121], 10);
     //marker.addTo(this.map);
-    L.marker([9.402069, -99.171121]).addTo(this.map);
-    var marker2 = new L.Marker(new L.LatLng(19.402069, -99.171131));
-    //this.map.addLayer(marker2).bindPopup('Map Frame').openPopup();
+    //L.marker(point2).addTo(this.map);
+    var marker2 = new L.Marker(new L.LatLng(point2[0], point2[1]));
+    this.map.addLayer(marker2)
     this.renderMap()
   }
   private renderMap(){

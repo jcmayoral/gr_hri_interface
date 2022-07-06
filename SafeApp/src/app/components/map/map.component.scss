@@ -11,4 +11,12 @@ capacitor-google-map {
   height: 400px;
 }
 
-@import "~leaflet/dist/leaflet.css";
+h1, h2, p {
+  text-align: center;
+}
+
+.leaflet-container {
+  height: 400px;
+  width: 80%;
+  margin: 0 auto;
+}
