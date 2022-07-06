@@ -15,14 +15,14 @@ const iconDefault = L.icon({
   iconRetinaUrl,
   iconUrl,
   shadowUrl,
-  iconSize: [2, 2],
-  iconAnchor: [1.2, 1.2],
+  iconSize: [40, 40],
+  iconAnchor: [40, 40],
   popupAnchor: [1, -1],
   tooltipAnchor: [16, -28],
   shadowSize: [41, 41]
 });
 
-//L.Marker.prototype.options.icon = iconDefault;
+L.Marker.prototype.options.icon = iconDefault;
 
 @Component({
   selector: 'app-map',
