@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 //import { File } from '@ionic-native/file/ngx';
+import {RequestsService} from '../../services/requests.service'
 
 @Component({
   selector: 'app-launch-sensors',
@@ -7,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./launch-sensors.page.scss'],
 })
 export class LaunchSensorsPage implements OnInit {
-  COMPONENTS = [];
+  COMPONENTS: any;
 
   constructor(
     //private file:File
+    private req: RequestsService
   )
   {
     //this.readFile()
@@ -20,9 +22,9 @@ export class LaunchSensorsPage implements OnInit {
   ngOnInit() {
   }
 
-  loadComponents(){
-
-    const components = ["IMU", "GPS", "Camera", "LiDAR"]
+  async loadComponents(){
+    this.COMPONENTS = (await this.req.get("get_roslaunchs")).data.available
+    /*
     for (const c of components){
       var data={
         component: c,
@@ -30,6 +32,11 @@ export class LaunchSensorsPage implements OnInit {
       }
       this.COMPONENTS.push(data);
     }
+    */
+  }
+
+  checkboxClick($event){
+    
   }
 
   /*

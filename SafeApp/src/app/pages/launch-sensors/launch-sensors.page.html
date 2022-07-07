@@ -5,19 +5,24 @@
 </ion-header>
 
 <ion-content>
-  <div class="wrapper">
+  <ion-card *ngFor="let entry of COMPONENTS">
+    <ion-label> <b> {{entry.name}}</b> </ion-label>
     <ion-grid>
-      <ion-row *ngFor="let entry of COMPONENTS">
+      <ion-row>
+        <ion-col>Package {{entry.package}}</ion-col>
+        <ion-col>Launch File {{entry.launch}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col> Node </ion-col>
+        <ion-col>  {{entry.node}}</ion-col>
         <ion-col>
-           <b> {{entry.component}} </b>
-        </ion-col>
-        <ion-col>
-          <ion-checkbox [(ngModel)]="entry.isChecked" name={entry.materia} (ionChange)="checkboxClick($event)" entry.component></ion-checkbox>
+          <!--ion-checkbox [(ngModel)]="entry.isrunning" name="running" (ionChange)="checkboxClick($event)" entry.component> </!--ion-checkbox-->
+          <ion-button>RUN</ion-button>
         </ion-col>
       </ion-row>
-      <!--ion-row *ngFor="let entry of Codigos">
-      <ion-col>{{entry.materia}}</ion-col-->
-    </ion-grid>
+      </ion-grid>
+    </ion-card>
+    <!--ion-row *ngFor="let entry of Codigos">
+    <ion-col>{{entry.materia}}</ion-col-->
     <ion-button expand="block"> Start Components </ion-button>
-  </div>
 </ion-content>
