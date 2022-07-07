@@ -16,8 +16,8 @@ const iconDefault = L.icon({
   iconRetinaUrl,
   iconUrl,
   shadowUrl,
-  iconSize: [40, 40],
-  iconAnchor: [40, 40],
+  iconSize: [20, 20],
+  iconAnchor: [20, 20],
   popupAnchor: [1, -1],
   tooltipAnchor: [16, -28],
   shadowSize: [41, 41]

@@ -1,9 +1,51 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>diagnostics</ion-title>
+    <ion-title>Diagnostics</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <br>
+  <span>
+    <ion-title> Metrics </ion-title>
+    <ion-grid>
+      <ion-row>
+        <ion-col>MTBI</ion-col>
+        <ion-col>
+          <ion-item>{{MTBI}}</ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>MTCI</ion-col>
+        <ion-col>
+          <ion-item>{{MTCI}}</ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>MTBF</ion-col>
+        <ion-col>
+          <ion-item>{{MTBF}}</ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>MTTF</ion-col>
+        <ion-col>
+          <ion-item>{{MTTF}}</ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </span>
 
+
+  <span>
+    <ion-title> Running Nodes </ion-title>
+    <ion-card *ngFor="let item of nodes.slice().reverse()" >
+        <!--ion-col> {{item.materia}}</!--ion-col-->
+        <ion-card-header>
+          <ion-card-title>
+            {{item}}
+          </ion-card-title> 
+        </ion-card-header>
+    </ion-card>
+  </span>
 </ion-content>

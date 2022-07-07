@@ -22,11 +22,13 @@ export class Tab1Page implements OnInit{
   velx : string = "0";
   vely : string = "0";
   velz : string = "0";
+  url : string
 
   constructor(public navCtrl: NavController, 
               public req : RequestsService,
               private sanitizer: DomSanitizer
               ) {
+    this.url = "http://grassrobotics.sytes.net:8000/get_nav_feedback"
     this.speed = new Speed()
   }
 
@@ -125,7 +127,7 @@ export class Tab1Page implements OnInit{
         //set up the new image
         //new_image.id = "feedback";
         //console.log(this.sanitizer.bypassSecurityTrustUrl(image.src + '?_=' + new Date().getMilliseconds()))
-        image.src = "http://jselkj.deta.dev/get_nav_feedback" + '?_=' + new Date().getMilliseconds();         
+        image.src = this.url + '?_=' + new Date().getMilliseconds();         
         console.log("a")  
         // insert new image and remove old
         //image.parentNode.insertBefore(new_image,image);
