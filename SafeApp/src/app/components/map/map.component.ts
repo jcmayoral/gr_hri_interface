@@ -6,6 +6,7 @@ import 'leaflet/dist/leaflet.css';
 import { antPath } from 'leaflet-ant-path';
 //import { ElementRef } from '@angular/core';
 import { GoogleMap } from '@capacitor/google-maps';
+import {RequestsService} from '../../services/requests.service'
 
 
 const iconRetinaUrl = 'assets/icon/marker-icon-2x.png';
@@ -37,8 +38,12 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   newMap : GoogleMap;
   apiKey = "AIzaSyBltjbC3PeZfQP59CaTvzaYuR15kcxHBeQ";
   options: any
+  node_selection: []
+  list_nodes
 
-  constructor() { }
+  constructor(private req : RequestsService) {
+    this.list_nodes = []
+   }
 
   ngOnInit() {
     console.log("init");
@@ -63,7 +68,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
           lat: 33.6,
           lng: -117.9,
         },
-        zoom: 8, // The initial zoom level to be rendered by the map
+        zoom: 15, // The initial zoom level to be rendered by the map
       },
     });
     // Add a marker to the map
@@ -122,6 +127,11 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
     */
 
+    console.log("OSSM ")
+
+    const osm_map = await this.req.get("get_osm_topomap");
+    console.log("OSM", osm_map);
+
     var bounds = [
       [19.397391, -99.182275],
       [19.403516, -99.167656]
@@ -147,7 +157,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.map = L.map("map2",{
       zoomControl: true,
       autopan: true,
-      center: L.latLng(house[0], house[1]),
+      //center: L.latLng(house[0], house[1]),
       }
     )
 
@@ -156,7 +166,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     
     await L.tileLayer(url, {
       //maxZoom: 80,
-      zoom: 5,
+      zoom: 15,
       //attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
 
@@ -165,8 +175,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     //this.map.fitBounds(bounds)
 
     //this.map.dragging.disable()
-    this.map.setView(house,15);
-
+    
     
     this.map.whenReady(() => {
       setTimeout(() => {
@@ -176,25 +185,25 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
 
-    
+    /*    
     antPath(([house, point2]),
       { color: '#FFFF00', weight: 5, opacity: 1.0 })
       .addTo(this.map);
-
-    const moptions = {title:"WP1", alt:"alt", riseOnHover:true, dragable:true, nohide: true}
-    L.marker(house, moptions).bindTooltip('marker1').addTo(this.map).openTooltip();
-    L.marker(point2, moptions).bindTooltip('marker2').addTo(this.map).openTooltip();
-
-    /*
-    var popup = L.popup()
-    .setLatLng(house)
-    .setContent('<p>Hello world!<br />This is a nice popup.</p>')
-    .openOn(this.map);
     */
-    //var bounds = this.map.getBounds();
-    //this.map.setView([19.402059, -99.171121], 10);
-    //marker.addTo(this.map);
-    //L.marker(point2).addTo(this.map);
+
+
+    for (let p of osm_map.data.points){
+      console.log("marker", p.x, p.y, p.name)
+      this.list_nodes.push(p.name)
+      let moptions = {title:p.name, alt:"alt", riseOnHover:true, dragable:true, nohide: true}
+      L.marker([p.x, p.y], moptions).bindTooltip(p.name).addTo(this.map).openTooltip();
+    }
+
+    this.map.setView(house,40);
+
+
+    //L.marker(house, moptions).bindTooltip('marker1').addTo(this.map).openTooltip();
+    //L.marker(point2, moptions).bindTooltip('marker2').addTo(this.map).openTooltip();
     this.renderMap()
   }
   private renderMap(){

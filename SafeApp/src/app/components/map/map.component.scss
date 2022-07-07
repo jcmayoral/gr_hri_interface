@@ -1,5 +1,5 @@
 .mymap {
-  width: 50%;
+  width: 100%;
   display: inline-block;
   overflow: hidden;
   outline: dashed 1px black;
@@ -16,7 +16,7 @@ h1, h2, p {
 }
 
 .leaflet-container {
-  height: auto;
+  height: 50%;
   width: 100%;
   margin: 0 auto;
 }
