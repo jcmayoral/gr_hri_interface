@@ -35,9 +35,14 @@ export class LaunchSensorsPage implements OnInit {
     */
   }
 
-  checkboxClick($event){
-    
-  }
+  async runLaunch(launch_id, event){
+    const response = await this.req.post3("run_roslaunchs",  {"id": launch_id});
+    console.log(response["data"].is_sucess, launch_id);  
+    var index = this.COMPONENTS.findIndex(function(e, i){
+      return e.name == launch_id
+    })
+    this.COMPONENTS[index].isrunning = response["data"].is_sucess
+  } 
 
   /*
   async readFile() {

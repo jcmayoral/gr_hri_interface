@@ -17,7 +17,7 @@
         <ion-col>  {{entry.node}}</ion-col>
         <ion-col>
           <!--ion-checkbox [(ngModel)]="entry.isrunning" name="running" (ionChange)="checkboxClick($event)" entry.component> </!--ion-checkbox-->
-          <ion-button>RUN</ion-button>
+          STATUS <ion-button (click)="runLaunch(entry.name, $event)">  {{entry.isrunning}} </ion-button>           
         </ion-col>
       </ion-row>
       </ion-grid>
