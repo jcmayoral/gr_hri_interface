@@ -10,6 +10,10 @@ export class HapticsService {
   hapticsImpactMedium = async () => {
     await Haptics.impact({ style: ImpactStyle.Medium });
   };
+
+  hapticsImpactHeavy = async () => {
+    await Haptics.impact({ style: ImpactStyle.Heavy });
+  };
   
   hapticsImpactLight = async () => {
     await Haptics.impact({ style: ImpactStyle.Light });

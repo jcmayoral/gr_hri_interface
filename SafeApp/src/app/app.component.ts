@@ -25,7 +25,7 @@ export class AppComponent {
 
         const resp = (await this.request.get("status")).data
         if (resp.problem){
-          this.haptics.hapticsVibrate()
+          await this.haptics.hapticsImpactHeavy()
           alert("problem in robot")
         }
         this.StartTimer();

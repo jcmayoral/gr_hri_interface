@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "~13.2.2",
     "@angular/router": "~13.2.2",
     "@asymmetrik/ngx-leaflet": "^13.0.2",
+    "@capacitor-community/app-icon": "^2.0.4",
     "@capacitor-community/http": "^1.4.1",
     "@capacitor/android": "3.5.1",
     "@capacitor/app": "1.1.1",
