@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HapticsService } from './services/haptics.service';
+import { RequestsService } from './services/requests.service';
 
 
 @Component({
@@ -9,18 +10,26 @@ import { HapticsService } from './services/haptics.service';
 })
 export class AppComponent {
   timer: any;
-  constructor(private haptics: HapticsService) {
+  constructor(private haptics: HapticsService,
+              private request: RequestsService) {
     console.log("haptics main")
     this.StartTimer()
   }
 
   StartTimer(){
-    this.timer = setTimeout(x => 
+    this.timer = setTimeout(async x => 
       {
         console.log("main timer")
-        this.haptics.hapticsImpactLight()
+
+        //this.haptics.hapticsImpactLight()
+
+        const resp = (await this.request.get("status")).data
+        if (resp.problem){
+          this.haptics.hapticsVibrate()
+          alert("problem in robot")
+        }
         this.StartTimer();
-      }, 2000);
+      }, 5000);
  
 
   }
