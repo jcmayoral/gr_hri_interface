@@ -35,11 +35,16 @@ export class LaunchSensorsPage implements OnInit {
     */
   }
 
-  async runLaunch(launch_id, event){
-    const response = await this.req.post3("run_roslaunchs",  {"id": launch_id});
-    console.log(response["data"].is_sucess, launch_id);  
+  async runLaunch(entry, event){
+    console.log(entry)
+    const response = await this.req.post3("run_roslaunchs",  {"id": entry.name,
+                                                              "package": entry.package,
+                                                              "node" : entry.node,
+                                                              "launch": entry.launch,
+                                                              "type": entry.type });
+    console.log(response["data"].is_sucess);  
     var index = this.COMPONENTS.findIndex(function(e, i){
-      return e.name == launch_id
+      return e.name == entry.name
     })
     this.COMPONENTS[index].isrunning = response["data"].is_sucess
   } 

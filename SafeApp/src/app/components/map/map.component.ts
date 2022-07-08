@@ -16,8 +16,8 @@ const iconDefault = L.icon({
   iconRetinaUrl,
   iconUrl,
   shadowUrl,
-  iconSize: [20, 20],
-  iconAnchor: [20, 20],
+  iconSize: [10, 10],
+  iconAnchor: [10, 10],
   popupAnchor: [1, -1],
   tooltipAnchor: [16, -28],
   shadowSize: [41, 41]
@@ -149,7 +149,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     //)
 
     const house = [19.397507, -99.161707]
-    const point2 = [19.388073, -99.182993]
+    //const point2 = [19.388073, -99.282993]
 
     
     //var streets = L.tileLayer(url, {id: 'mapbox/streets-v11', tileSize: 512, zoomOffset: -1});
@@ -157,6 +157,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.map = L.map("map2",{
       zoomControl: true,
       autopan: true,
+      zomm:2
       //center: L.latLng(house[0], house[1]),
       }
     )
@@ -165,8 +166,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
     
     await L.tileLayer(url, {
-      //maxZoom: 80,
-      zoom: 15,
+      maxZoom: 20,
+      zoom: 1,
       //attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
 
@@ -199,7 +200,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       L.marker([p.x, p.y], moptions).bindTooltip(p.name).addTo(this.map).openTooltip();
     }
 
-    this.map.setView(house,40);
+    this.map.setView(house,19);
 
 
     //L.marker(house, moptions).bindTooltip('marker1').addTo(this.map).openTooltip();
