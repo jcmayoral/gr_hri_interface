@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
-import { Chart, LineElement, PointElement, DoughnutController, BarController, LineController, ArcElement, CategoryScale, LinearScale, BarElement, PieController} from 'chart.js' 
+import { Chart, LineElement, PointElement, DoughnutController, BarController, Legend, LineController, ArcElement, CategoryScale, LinearScale, BarElement, PieController} from 'chart.js' 
 
 @Component({
   selector: 'app-chart',
@@ -22,14 +22,14 @@ export class ChartComponent implements AfterViewInit {
   // When we try to call our chart to initialize methods in ngOnInit() it shows an error nativeElement of undefined. 
   // So, we need to call all chart methods in ngAfterViewInit() where @ViewChild and @ViewChildren will be resolved.
   ngAfterViewInit() {
-    //this.barChartMethod();
+    this.barChartMethod();
     this.doughnutChartMethod();
     //this.lineChartMethod();
   }
 
   barChartMethod() {
     // Now we need to supply a Chart element reference with an object that defines the type of chart we want to use, and the type of data we want to display.
-    Chart.register(BarController, CategoryScale, LinearScale, BarElement) 
+    Chart.register(BarController, CategoryScale, LinearScale, BarElement, Legend) 
     const labels = ["TOTAL TIME", "COLLECT", "CUT"]
     const times = [200, 100,100]
   
@@ -38,7 +38,7 @@ export class ChartComponent implements AfterViewInit {
       data: {
         labels: labels,
         datasets: [{
-          label: 'Time of Exection',
+          label: 'Time of Execution',
           data: times,
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
@@ -83,25 +83,33 @@ export class ChartComponent implements AfterViewInit {
   }
 
   doughnutChartMethod() {
-    Chart.register(DoughnutController, ArcElement, PieController) 
-    const mydata = {
-      labels: [
-        'Red',
-      ],
-      
-      datasets: [{
-        label: 'Red',
-        data: [300, 50, 100],
+    Chart.register(DoughnutController, ArcElement, PieController, Legend) 
+    const mydatasets = [{
+      labels: ['A', 'B'],
+      label: 'CUT',
+      data: [50, 100],
+      backgroundColor: [
+        'rgb(255, 99, 132)',
+        'rgb(54, 162, 235)',
+      ]}, 
+      {
+        labels: ['A', 'B'],
+        label: 'COLLECTING',
+        data: [400, 1200],
         backgroundColor: [
-          'rgb(255, 99, 132)',
-          'rgb(54, 162, 235)',
-          'rgb(255, 205, 86)'
-        ],
-      }]
+          'rgb(255, 0, 0)',
+          'rgb(0, 0, 255)',
+      ]
+    }]
+
+
+    const mydata = {
+      labels: ['RUN', 'Change Row'],
+      datasets: mydatasets
     };
 
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement,{
-      type: 'doughnut',
+      type: 'pie',
       data: mydata,
       options: {
         responsive: true,
