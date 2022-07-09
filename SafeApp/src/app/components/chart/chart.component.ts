@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
-import { Chart, LineElement, PointElement, DoughnutController, BarController, LineController, ArcElement, CategoryScale, LinearScale, BarElement} from 'chart.js' 
+import { Chart, LineElement, PointElement, DoughnutController, BarController, LineController, ArcElement, CategoryScale, LinearScale, BarElement, PieController} from 'chart.js' 
 
 @Component({
   selector: 'app-chart',
@@ -22,21 +22,24 @@ export class ChartComponent implements AfterViewInit {
   // When we try to call our chart to initialize methods in ngOnInit() it shows an error nativeElement of undefined. 
   // So, we need to call all chart methods in ngAfterViewInit() where @ViewChild and @ViewChildren will be resolved.
   ngAfterViewInit() {
-    this.barChartMethod();
+    //this.barChartMethod();
     this.doughnutChartMethod();
-    this.lineChartMethod();
+    //this.lineChartMethod();
   }
 
   barChartMethod() {
     // Now we need to supply a Chart element reference with an object that defines the type of chart we want to use, and the type of data we want to display.
     Chart.register(BarController, CategoryScale, LinearScale, BarElement) 
+    const labels = ["TOTAL TIME", "COLLECT", "CUT"]
+    const times = [200, 100,100]
+  
     this.barChart = new Chart(this.barCanvas.nativeElement, {
       type: "bar",
       data: {
-        labels: ['BJP', 'INC', 'AAP', 'CPI', 'CPI-M', 'NCP'],
+        labels: labels,
         datasets: [{
-          label: '# of Votes',
-          data: [200, 50, 30, 15, 20, 34],
+          label: 'Time of Exection',
+          data: times,
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
@@ -76,36 +79,67 @@ export class ChartComponent implements AfterViewInit {
           }
         }
       }
-    })
+    })  
   }
 
   doughnutChartMethod() {
-    Chart.register(DoughnutController, ArcElement) 
+    Chart.register(DoughnutController, ArcElement, PieController) 
+    const mydata = {
+      labels: [
+        'Red',
+      ],
+      
+      datasets: [{
+        label: 'Red',
+        data: [300, 50, 100],
+        backgroundColor: [
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
+          'rgb(255, 205, 86)'
+        ],
+      }]
+    };
 
-    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
+    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement,{
       type: 'doughnut',
-      data: {
-        labels: ['BJP', 'Congress', 'AAP', 'CPM', 'SP'],
-        datasets: [{
-          label: '# of Votes',
-          data: [50, 29, 15, 10, 7],
-          backgroundColor: [
-            'rgba(255, 159, 64, 0.2)',
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)'
-          ],
-          hoverBackgroundColor: [
-            '#FFCE56',
-            '#FF6384',
-            '#36A2EB',
-            '#FFCE56',
-            '#FF6384'
-          ]
-        }]
-      }
+      data: mydata,
+      options: {
+        responsive: true,
+        aspectRatio: 1,
+        plugins:{
+          legend: {
+            display: true,
+          }
+        }
+        //maintainaApectRatio: true,
+      },
     });
+    console.log(this.doughnutChart.legend)
+    /*
+    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, 
+      {
+        type: 'doughnut',
+        data: mydata,
+        options: {
+          radius: 100,
+          responsive:  true,
+          plugins:{
+            legend: {
+              display: true,
+              labels:{
+                color: 'black'
+              },
+              rtl: true,
+              title:{
+                display: true,
+                text: "HOLA MUNDO"
+              }
+            },
+          }
+        }
+      }
+      );
+      */
   }
 
   lineChartMethod() {
