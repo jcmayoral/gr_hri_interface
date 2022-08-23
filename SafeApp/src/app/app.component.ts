@@ -24,7 +24,7 @@ export class AppComponent {
         //this.haptics.hapticsImpactLight()
 
         const resp = (await this.request.get("status")).data
-        if (false){//resp.problem){
+        if (resp.problem){
           await this.haptics.hapticsImpactHeavy()
           alert("problem in robot")
         }
