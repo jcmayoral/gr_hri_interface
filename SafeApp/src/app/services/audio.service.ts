@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Platform } from '@ionic/angular';
-import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
 interface Sound {
   key: string;
@@ -13,46 +11,33 @@ interface Sound {
 })
 export class AudioService {
   private sounds: Sound[] = [];
-  private audioPlayer: HTMLAudioElement = new Audio();
-  private forceWebAudio: boolean = true;
-  constructor(private platform: Platform, private nativeAudio: NativeAudio){
+  private _player: HTMLAudioElement = new Audio();
+  isPlaying = false;
+  isLoading = false;
+
+  constructor(){
+    this._player.muted=false;
   }
+
   preload(key: string, asset: string): void {
-    if(this.platform.is('cordova') && !this.forceWebAudio){
-      this.nativeAudio.preloadSimple(key, asset);
-      this.sounds.push({
-        key: key,
-        asset: asset,
-        isNative: true
-      });
-    } else {
-      console.log("preload")
-      let audio = new Audio();
-      audio.src = asset;
-      this.sounds.push({
-        key: key,
-        asset: asset,
-        isNative: false
-      });
-    }
+    console.log("preload")
+    let audio = new Audio();
+    audio.src = asset;
+    this.sounds.push({
+      key: key,
+      asset: asset,
+      isNative: false
+    });
   }
+
   play(key: string): void {
     let soundToPlay = this.sounds.find((sound) => {
       return sound.key === key;
     });
 
     console.log("a")
-    if(soundToPlay.isNative){
-      console.log("b")
-      this.nativeAudio.play(soundToPlay.asset).then((res) => {
-        console.log(res);
-      }, (err) => {
-        console.log(err);
-      });
-    } else {
-      console.log("c", soundToPlay.asset)
-      this.audioPlayer.src = soundToPlay.asset;
-      this.audioPlayer.play();
-    }
+    console.log("c", soundToPlay.asset)
+    this._player.src = soundToPlay.asset;
+    this._player.play();
   }
 }

@@ -27,11 +27,13 @@ export class AppComponent {
 
         const resp = true;// (await this.request.get("status")).data
         if (true) {//(resp.problem){
+          await this.audio.play('Alert')
+
           await this.haptics.hapticsImpactHeavy().then(()=>{
-            this.audio.play('Alert')
+            //this.audio.play('Alert')
           }).catch(()=>
           {
-            this.audio.play('Alert')
+            //this.audio.play('Alert')
 
           })
           alert("problem in robot")
