@@ -9,7 +9,9 @@ import {Http} from '@capacitor-community/http'
 
 
 export class RequestsService {
-  endpoint = 'http://grassrobotics.sytes.net:8000/'
+  //endpoint = 'http://grassrobotics.sytes.net:8000/'
+  endpoint = 'http://grassrobotics.ddns.net:8000/'
+
   //endpoint = 'http://http://201.137.141.171:8000/'
   //endpoint = 'http://localhost:8000/'
 

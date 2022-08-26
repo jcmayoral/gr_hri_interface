@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { HapticsService } from './services/haptics.service';
 import { RequestsService } from './services/requests.service';
-
+import { AudioService } from './services/audio.service';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +11,10 @@ import { RequestsService } from './services/requests.service';
 export class AppComponent {
   timer: any;
   constructor(private haptics: HapticsService,
-              private request: RequestsService) {
+              private request: RequestsService, 
+              private audio: AudioService) {
     console.log("haptics main")
+    this.audio.preload('Alert', 'assets/audio/starwars.mp3');
     this.StartTimer()
   }
 
@@ -23,9 +25,15 @@ export class AppComponent {
 
         //this.haptics.hapticsImpactLight()
 
-        const resp = (await this.request.get("status")).data
-        if (resp.problem){
-          await this.haptics.hapticsImpactHeavy()
+        const resp = true;// (await this.request.get("status")).data
+        if (true) {//(resp.problem){
+          await this.haptics.hapticsImpactHeavy().then(()=>{
+            this.audio.play('Alert')
+          }).catch(()=>
+          {
+            this.audio.play('Alert')
+
+          })
           alert("problem in robot")
         }
         this.StartTimer();
