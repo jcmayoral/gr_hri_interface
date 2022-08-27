@@ -4,11 +4,23 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    loadChildren: () => import('./pages/tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
     path: 'run-components',
-    loadChildren: () => import('./run-components/run-components.module').then( m => m.RunComponentsPageModule)
+    loadChildren: () => import('./pages/launch-sensors/launch-sensors.module').then( m => m.LaunchSensorsPageModule)
+  },
+  {
+    path: 'diagnostics',
+    loadChildren: () => import('./pages/diagnostics/diagnostics.module').then( m => m.DiagnosticsPageModule)
+  },
+  {
+    path: 'semi-autonomous',
+    loadChildren: () => import('./pages/semi-autonomous/semi-autonomous.module').then( m => m.SemiAutonomousPageModule)
+  },
+  {
+    path: 'stats',
+    loadChildren: () => import('./pages/stats/stats.module').then( m => m.StatsPageModule)
   }
 ];
 @NgModule({

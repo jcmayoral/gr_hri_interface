@@ -1,0 +1,22 @@
+<!--canvas responsive="true" id="mycanvas" type="canvas"></canvas-->
+
+<ion-card>
+  <ion-card-content class="voronoi-content">
+    <svg id="content-box" class="voronoi"></svg>
+  </ion-card-content>
+</ion-card>
+  <!--app-scatter></app-scatter-->
+  <ion-grid>
+    <ion-row>
+      <ion-col>Waypoint</ion-col>
+      <ion-col>
+        <!--ion-list placeholder="Select fruit">
+          <ion-list-select *ngFor="let item of itemlist" type="string"></ion-list-select>
+        </ion-list-->
+        <ion-select   label="BBB" [(ngModel)]="node_selection" ok-text="Seleccionar" cancel-text="Cancelar" text="AAA" >
+          <ion-select-option *ngFor="let entry of list_nodes"> {{entry}} </ion-select-option>
+        </ion-select>  
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-button>GO!</ion-button>

@@ -4,8 +4,9 @@ const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
   appName: 'SafeApp',
   webDir: 'www',
-  bundledWebRuntime: false,
-  linuxAndroidStudioPath: "/media/mount/programs/android-studio/bin/studio.sh"
+  //webDir: 'src',
+  bundledWebRuntime: true,
+  //linuxAndroidStudioPath: "/media/mount/programs/android-studio/bin/studio.sh"
 };
 
 export default config;

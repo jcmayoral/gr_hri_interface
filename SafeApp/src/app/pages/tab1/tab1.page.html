@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Teleoperation
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 1</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <ion-label> Lock Button </ion-label>
+  <ion-button class="lockbutton" (click)="lock()">
+    Lock Button
+  </ion-button>
+  <ion-row>
+    <ion-col>
+      <ion-label> Navigation Helper </ion-label>
+      <ion-card>
+        <img id="feedback" src="http://grassrobotics.sytes.net:8000/get_nav_feedback">
+      </ion-card>    
+    </ion-col>
+    <ion-col>
+      <ion-label> Joystick </ion-label>
+      <ion-card>
+          <div style="position: relative; left: 0; top: 0; min-height: 200px; background-color: #dddddd" id="zone_joystick"></div>
+      </ion-card>
+      <ion-label>{{velx}}</ion-label>
+      <ion-label>{{vely}}</ion-label>
+      <ion-label>{{velz}}></ion-label>
+    </ion-col>
+  </ion-row>
+  
+
+ 
+
+
+
+  <!--app-explore-container name="Tab 1 page"></app-explore-container-->
+</ion-content>

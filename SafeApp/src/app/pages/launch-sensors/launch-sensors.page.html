@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Sensors Launch</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let entry of COMPONENTS">
+    <ion-label> <b> {{entry.name}}</b> </ion-label>
+    <ion-grid>
+      <ion-row>
+        <ion-col>Package {{entry.package}}</ion-col>
+        <ion-col>Launch File {{entry.launch}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col> Node </ion-col>
+        <ion-col>  {{entry.node}}</ion-col>
+        <ion-col>
+          <!--ion-checkbox [(ngModel)]="entry.isrunning" name="running" (ionChange)="checkboxClick($event)" entry.component> </!--ion-checkbox-->
+          STATUS <ion-button (click)="runLaunch(entry, $event)">  {{entry.isrunning}} </ion-button>           
+        </ion-col>
+      </ion-row>
+      </ion-grid>
+    </ion-card>
+    <!--ion-row *ngFor="let entry of Codigos">
+    <ion-col>{{entry.materia}}</ion-col-->
+</ion-content>
