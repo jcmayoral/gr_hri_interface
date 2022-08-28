@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HapticsService } from './services/haptics.service';
 import { RequestsService } from './services/requests.service';
 import { AudioService } from './services/audio.service';
+import { GeolocationService } from './services/geolocation.service';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +13,10 @@ export class AppComponent {
   timer: any;
   constructor(private haptics: HapticsService,
               private request: RequestsService, 
-              private audio: AudioService) {
-    console.log("haptics main")
+              private audio: AudioService, 
+              private geo: GeolocationService) {
     this.audio.preload('Alert', 'assets/audio/starwars.mp3');
+    this.geo.setWatchDog()
     this.StartTimer()
   }
 
@@ -22,11 +24,11 @@ export class AppComponent {
     this.timer = setTimeout(async x => 
       {
         console.log("main timer")
-
+        this.geo.getCurrentPosition()
         //this.haptics.hapticsImpactLight()
 
-        const resp = true;// (await this.request.get("status")).data
-        if (true) {//(resp.problem){
+        const resp =  (await this.request.get("status")).data
+        if (false){//resp.problem){
           await this.audio.play('Alert')
 
           await this.haptics.hapticsImpactHeavy().then(()=>{
