@@ -16,18 +16,7 @@ export class RequestsService {
   //endpoint = 'http://localhost:8000/'
 
   //thisendpoint = "https://jselkj.deta.dev/"
-  /*
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json',
-                                'Cache-Control': 'no-cache',
-                                'Access-Control-Allow-Origin': '*',
-                                //'Access-Control-Request-Headers': 'Content-Type',
-                                //'accept':'application/json'
-                                //'Connection' : 'keep-alive'
-                                //'apikey': 'wq16ai0ymsj6nxaw0ujr2b6gu75h2nzo'})
-                              })
-  };
-  */
+
   constructor()  { }
 
   async lock(){

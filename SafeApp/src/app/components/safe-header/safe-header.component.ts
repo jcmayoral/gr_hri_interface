@@ -18,4 +18,10 @@ export class SafeHeaderComponent implements OnInit {
     console.log("response", response)
   }
 
+  async book(){
+    console.log("lock")
+    const response = await this.req.lock()
+    console.log("response", response)
+  }
+
 }
