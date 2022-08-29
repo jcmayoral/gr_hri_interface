@@ -20,8 +20,8 @@ const routes: Routes = [
         loadChildren: () => import('../full-autonomous/full-autonomous.module').then(m => m.FullAutonomousPageModule)
       },
       {
-        path: 'launch-sensors',
-        loadChildren: () => import('../launch-sensors/launch-sensors.module').then(m => m.LaunchSensorsPageModule)
+        path: 'launcher',
+        loadChildren: () => import('../launcher/launcher.module').then(m => m.LauncherPageModule)
       },
       {
         path: 'diagnostics',

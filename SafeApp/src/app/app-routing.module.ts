@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: 'run-components',
-    loadChildren: () => import('./pages/launch-sensors/launch-sensors.module').then( m => m.LaunchSensorsPageModule)
+    loadChildren: () => import('./pages/launcher/launcher.module').then( m => m.LauncherPageModule)
   },
   {
     path: 'diagnostics',

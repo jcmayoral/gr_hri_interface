@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import {RequestsService} from '../../services/requests.service'
 
 @Component({
-  selector: 'app-launch-sensors',
-  templateUrl: './launch-sensors.page.html',
-  styleUrls: ['./launch-sensors.page.scss'],
+  selector: 'app-launcher',
+  templateUrl: './launcher.page.html',
+  styleUrls: ['./launcher.page.scss'],
 })
-export class LaunchSensorsPage implements OnInit {
+export class LauncherPage implements OnInit {
   COMPONENTS: any;
 
   constructor(

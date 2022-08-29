@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LaunchSensorsPageRoutingModule } from './launch-sensors-routing.module';
+import { LauncherPageRoutingModule } from './launcher-routing.module';
 
-import { LaunchSensorsPage } from './launch-sensors.page';
+import { LauncherPage } from './launcher.page';
 
 //import { File } from '@ionic-native/file/ngx';
 
@@ -15,9 +15,9 @@ import { LaunchSensorsPage } from './launch-sensors.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    LaunchSensorsPageRoutingModule
+    LauncherPageRoutingModule
   ],
   //providers: [File],
-  declarations: [LaunchSensorsPage]
+  declarations: [LauncherPage]
 })
-export class LaunchSensorsPageModule {}
+export class LauncherPageModule {}
