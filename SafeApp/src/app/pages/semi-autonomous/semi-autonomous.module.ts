@@ -1,3 +1,4 @@
+import { SafeHeaderComponent } from './../../components/safe-header/safe-header.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -18,6 +19,6 @@ import { MapComponent } from 'src/app/components/map/map.component';
     IonicModule,
     SemiAutonomousPageRoutingModule
   ],
-  declarations: [SemiAutonomousPage, ScatterComponent, VoronoiComponent, MapComponent]
+  declarations: [SemiAutonomousPage, ScatterComponent, VoronoiComponent, MapComponent, SafeHeaderComponent]
 })
 export class SemiAutonomousPageModule {}

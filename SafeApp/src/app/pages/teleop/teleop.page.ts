@@ -8,11 +8,11 @@ import { Speed } from 'src/app/interfaces/speed';
 import {RequestsService} from '../../services/requests.service'
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  selector: 'app-teleop',
+  templateUrl: 'teleop.page.html',
+  styleUrls: ['teleop.page.scss']
 })
-export class Tab1Page implements OnInit{
+export class TeleopPage implements OnInit{
   size :number = 50;
   manager;
   thumbnail: any;
@@ -105,13 +105,6 @@ export class Tab1Page implements OnInit{
       }, 2000);
  
 
-  }
-   
-  
-  async lock(){
-    console.log("lock")
-    const response = await this.req.lock()
-    console.log("response", response)
   }
 
   updateImage(){
