@@ -16,8 +16,8 @@ const routes: Routes = [
         loadChildren: () => import('../semi-autonomous/semi-autonomous.module').then(m => m.SemiAutonomousPageModule)
       },
       {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+        path: 'fullautonomous',
+        loadChildren: () => import('../full-autonomous/full-autonomous.module').then(m => m.FullAutonomousPageModule)
       },
       {
         path: 'launch-sensors',

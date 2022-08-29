@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit, ElementRef } from '@angular/core';
-import { ViewDidEnter } from '@ionic/angular';
 import * as L from 'leaflet';
 //import * as L from 'leaflet.gridlayer.googlemutant';
 import 'leaflet/dist/leaflet.css';

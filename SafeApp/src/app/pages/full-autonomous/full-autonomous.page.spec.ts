@@ -2,11 +2,11 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
-import { Tab3Page } from './tab3.page';
+import { FullAutonomousPage } from './full-autonomous.page';
 
-describe('Tab3Page', () => {
-  let component: Tab3Page;
-  let fixture: ComponentFixture<Tab3Page>;
+describe('FullAutonomousPage', () => {
+  let component: FullAutonomousPage;
+  let fixture: ComponentFixture<FullAutonomousPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({

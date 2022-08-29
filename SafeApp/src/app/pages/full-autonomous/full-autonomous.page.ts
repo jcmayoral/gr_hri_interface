@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-tab3',
-  templateUrl: 'tab3.page.html',
-  styleUrls: ['tab3.page.scss']
+  selector: 'app-full-autonomous',
+  templateUrl: 'full-autonomous.page.html',
+  styleUrls: ['full-autonomous.page.scss']
 })
-export class Tab3Page {
+export class FullAutonomousPage {
   timer: any;
   url: string;
 
   constructor() {
     this.StartTimer()
-    this.url = "http://grassrobotics.sytes.net:8000/get_nav_feedback"
+    this.url = "http://grassrobotics.ddns.net:8000/get_nav_feedback"
 
   }
 
