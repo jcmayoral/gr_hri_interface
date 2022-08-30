@@ -1,3 +1,4 @@
+import { RadarComponent } from './../../components/radar/radar.component';
 import { SafeHeaderComponent } from '../../components/safe-header/safe-header.component';
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
@@ -16,6 +17,6 @@ import { TeleopPageRoutingModule } from './teleop-routing.module';
     ExploreContainerComponentModule,
     TeleopPageRoutingModule
   ],
-  declarations: [TeleopPage, SafeHeaderComponent]
+  declarations: [TeleopPage, SafeHeaderComponent, RadarComponent]
 })
 export class TeleopPageModule {}

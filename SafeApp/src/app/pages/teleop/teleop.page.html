@@ -7,36 +7,25 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
   <app-safe-header></app-safe-header>
+  <app-radar></app-radar>
 
-  <ion-row>
-    <ion-col>
-      <ion-label> Navigation Helper </ion-label>
-      <ion-card>
-        <img id="feedback" src="http://grassrobotics.sytes.net:8000/get_nav_feedback">
-      </ion-card>    
-    </ion-col>
-    <ion-col>
-      <ion-label> Joystick </ion-label>
-      <ion-card>
-          <div style="position: relative; left: 0; top: 0; min-height: 200px; background-color: #dddddd" id="zone_joystick"></div>
-      </ion-card>
-      <ion-label>{{velx}}</ion-label>
-      <ion-label>{{vely}}</ion-label>
-      <ion-label>{{velz}}></ion-label>
-    </ion-col>
-  </ion-row>
-  
-
- 
-
-
-
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-label> Navigation Helper </ion-label>
+        <ion-card>
+          <img id="feedback" [src]=url>
+        </ion-card>    
+      </ion-col>
+      <ion-col>
+        <ion-label> Joystick </ion-label>
+        <ion-card>
+            <div style="position: relative; left: 0; top: 0; min-height: 200px; background-color: #dddddd" id="zone_joystick"></div>
+        </ion-card>
+        <ion-label>X: {{speed.vel_x}} Y:{{speed.vel_y}} Z:{{speed.vel_z}}</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <!--app-explore-container name="Tab 1 page"></app-explore-container-->
 </ion-content>

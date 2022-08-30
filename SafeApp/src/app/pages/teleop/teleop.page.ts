@@ -19,9 +19,6 @@ export class TeleopPage implements OnInit{
   objectURL: any;
   timer: any
   speed: Speed
-  velx : string = "0";
-  vely : string = "0";
-  velz : string = "0";
   url : string
 
   constructor(public navCtrl: NavController, 
@@ -80,16 +77,13 @@ export class TeleopPage implements OnInit{
   async handleData(){
       const func = this.req;
       var speed = this.speed;
-      var test = 0;
-      var vx = this.velx;
       var size = this.size
-      this.manager.on("move", async function(evt,data){
+      this.manager.on("move", async(evt,data)=>{
         //console.log("move", data.angle, data.position, data.distance, evt, this.speed)
-        console.log(evt.type, evt.target.id, evt.target.actives[0], speed, vx)
-        speed.vel_x = test;
-        test = test +1;
-        vx = test.toString();
-        const response = await func.publish_speed(data.distance/size, data.angle.degree/360)
+        console.log(evt.type, evt.target.id, evt.target.actives[0], speed)
+        speed.vel_x = data.distance/size;
+        speed.vel_z = data.angle.degree/360
+        const response = await func.publish_speed(speed.vel_x, speed.vel_z)
       })
       //this.updateImage()
   }
@@ -110,11 +104,8 @@ export class TeleopPage implements OnInit{
   updateImage(){
     console.log("update", this.speed)
     var image = document.getElementById("feedback") as HTMLImageElement;
-    console.log(image, image.complete, this.velx)
+    console.log(image, image.complete)
 
-    //importthis.velx = this.speed.vel_x.toString();
-    //this.vely = this.speed.vel_y.toString();
-    //this.velz = this.speed.vel_z.toString();
     if(image.complete) {
         //var new_image = new Image();
         //set up the new image
