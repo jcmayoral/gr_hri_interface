@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { Injectable, OnInit, AfterViewInit } from '@angular/core';
 
@@ -7,7 +8,8 @@ import { Injectable, OnInit, AfterViewInit } from '@angular/core';
 
 
 export class User {
-    constructor(public storage: Storage){
+    constructor(public storage: Storage,
+                public router: Router){
 
     }
     async createDB(){
@@ -32,6 +34,14 @@ export class User {
           return value === true;
         });
     }
+
+    logout(){
+        this.storage.remove("is_loggedIn").then(()=>{
+            console.log("user logged out")
+            this.router.navigateByUrl("login")
+        })
+    }
     
 
 }
+    

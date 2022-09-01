@@ -8,11 +8,12 @@ import { Component } from '@angular/core';
 export class FullAutonomousPage {
   timer: any;
   url: string;
+  status: string
 
   constructor() {
     this.StartTimer()
     this.url = "http://grassrobotics.ddns.net:8000/get_nav_feedback"
-
+    this.status = "Waiting for robot"
   }
 
   maxtime: any=30
