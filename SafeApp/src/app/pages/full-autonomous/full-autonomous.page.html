@@ -1,18 +1,14 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 3
+      Full Autonomy
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Full Autonomy</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
+  <app-safe-header></app-safe-header>
+  
   <ion-card class="center">
     <img id="feedback" src="http://grassrobotics.ddns.net:8000/get_nav_feedback">
   </ion-card>    

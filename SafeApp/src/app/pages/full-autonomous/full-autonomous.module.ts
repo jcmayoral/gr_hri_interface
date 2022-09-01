@@ -1,3 +1,4 @@
+import { SafeHeaderComponent } from './../../components/safe-header/safe-header.component';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -17,6 +18,6 @@ import {FullAutonomousPageRoutingModule } from './full-autonomous-routing.module
     RouterModule.forChild([{ path: '', component: FullAutonomousPage }]),
     FullAutonomousPageRoutingModule,
   ],
-  declarations: [FullAutonomousPage]
+  declarations: [FullAutonomousPage, SafeHeaderComponent]
 })
 export class FullAutonomousPageModule {}
