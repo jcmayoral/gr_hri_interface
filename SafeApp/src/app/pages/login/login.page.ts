@@ -12,6 +12,9 @@ export class LoginPage implements OnInit {
   constructor(private  router:  Router, protected user: User) { }
 
   ngOnInit() {
+    if (this.user.isLoggedIn()){
+      this.router.navigateByUrl("tabs")
+    }
   }
 
   signin(user, password){
