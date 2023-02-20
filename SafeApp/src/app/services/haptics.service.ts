@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Haptics, ImpactStyle } from '@capacitor/haptics';
+import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
 
 @Injectable({
   providedIn: 'root'
@@ -8,18 +8,22 @@ import { Haptics, ImpactStyle } from '@capacitor/haptics';
 
 export class HapticsService {
   hapticsImpactMedium = async () => {
+    Haptics.notification( {type: NotificationType.Error })
     await Haptics.impact({ style: ImpactStyle.Medium });
   };
 
   hapticsImpactHeavy = async () => {
+    Haptics.notification( {type: NotificationType.Error });
     await Haptics.impact({ style: ImpactStyle.Heavy });
   };
   
   hapticsImpactLight = async () => {
+    Haptics.notification( {type: NotificationType.Error })
     await Haptics.impact({ style: ImpactStyle.Light });
   };
   
   hapticsVibrate = async () => {
+    Haptics.notification( {type: NotificationType.Error })
     await Haptics.vibrate();
   };
   

@@ -10,10 +10,11 @@ import {Http} from '@capacitor-community/http'
 
 export class RequestsService {
   //endpoint = 'http://grassrobotics.sytes.net:8000/'
-  endpoint = 'http://grassrobotics.ddns.net:8000/'
+  //endpoint = 'http://grassrobotics.ddns.net:8000/'
 
   //endpoint = 'http://http://201.137.141.171:8000/'
-  //endpoint = 'http://localhost:8000/'
+  //endpoint = 'http://192.168.1.66:8000/'
+  endpoint = "http://localhost:8000"
 
   //thisendpoint = "https://jselkj.deta.dev/"
 
@@ -28,6 +29,10 @@ export class RequestsService {
     console.log(x,z)
     return await this.post3("speed/", {"vel_x": x, "vel_y": 0.2, "vel_z": z})
     //this.get("/users/me")
+  }
+
+  async login(user,password){
+    return await this.post3("login/", {"user": user, "password": password})
   }
 
   async get(route: string){

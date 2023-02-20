@@ -33,11 +33,11 @@ export class AppComponent {
 
         if (this.user.isLoggedIn()){
           console.log("skip")
-          //const resp =  (await this.request.get("status")).data
-          if (true){//ioresp.problem){
+          const resp =  (await this.request.get("status")).data
+          if (resp.problem){
             await this.audio.play('Alert')
 
-            await this.haptics.hapticsImpactHeavy().then(()=>{
+            await this.haptics.hapticsVibrate().then(()=>{
               //this.audio.play('Alert')
             }).catch(()=>
             {
