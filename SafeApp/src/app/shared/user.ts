@@ -25,14 +25,15 @@ export class User {
         console.log("login")
         this.createDB()          
         
-        await this.req.login(username, password).then((response){
-            console.log (response)
-        })
+        //await this.req.login(username, password).then((response)=>{
+        //    console.log (response)
+        //  })
 
-        if (true){
-            alert("Username or password is incorrect")
-            return
-        }
+        ///if (true){
+        //    alert("Username or password is incorrect")
+        //    return
+        //}
+        alert("Accessing...")
 
         return this.storage.set("is_loggedIn", true).then(() => {
             //his.setUsername(username); 

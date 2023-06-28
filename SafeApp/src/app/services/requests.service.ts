@@ -14,7 +14,7 @@ export class RequestsService {
 
   //endpoint = 'http://http://201.137.141.171:8000/'
   //endpoint = 'http://192.168.1.66:8000/'
-  endpoint = "http://localhost:8000"
+  endpoint = "http://localhost:8000/"
 
   //thisendpoint = "https://jselkj.deta.dev/"
 
