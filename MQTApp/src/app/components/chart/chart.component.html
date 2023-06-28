@@ -1,0 +1,34 @@
+<p>
+  chart works!a
+</p>
+
+<ion-content [fullscreen]="true" >
+  <div class="ion-padding" style="width:60%; align-items:center">
+    <ion-card>
+      <ion-card-header>
+        Time Execution Per Task
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #barCanvas style="position: relative; height:20vh; width:40vw"></canvas>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        Time Execution Per Task
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #doughnutCanvas style="align-items: center; position: relative; height:20%; width:10vw"></canvas>
+      </ion-card-content>
+    </ion-card>
+
+ 
+    <!--ion-card>
+      <ion-card-header>
+        Line Chart
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #lineCanvas style="position: relative; height:20vh; width:40vw"></canvas>
+      </ion-card-content>
+    </!--ion-card-->
+  </div>
+</ion-content>

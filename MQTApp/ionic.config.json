@@ -1,0 +1,7 @@
+{
+  "name": "SafeApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

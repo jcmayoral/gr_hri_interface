@@ -1,0 +1,19 @@
+.voronoi{
+    width: 50%;
+    align-items: center;
+    min-height: 5%;
+    display: inline-block;
+    position: absolute;
+    vertical-align: middle;
+    top: 10%;
+    left: 10%;
+}
+
+.voronoi-content{
+    display: inline-block;
+    position: relative;
+    width: 50%;
+    padding-bottom: 10vw;
+    vertical-align: middle;
+    overflow: hidden;
+}
