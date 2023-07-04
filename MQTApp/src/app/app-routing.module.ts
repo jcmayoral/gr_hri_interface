@@ -25,6 +25,10 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'map',
+    loadChildren: () => import('./pages/map/map.module').then( m => m.MapPageModule)
   }
 
 ];

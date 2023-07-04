@@ -32,6 +32,10 @@ const routes: Routes = [
         loadChildren: () => import('../stats/stats.module').then(m => m.StatsPageModule)
       },
       {
+        path: 'map',
+        loadChildren: () => import('../map/map.module').then(m => m.MapPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/teleop',
         pathMatch: 'full'
