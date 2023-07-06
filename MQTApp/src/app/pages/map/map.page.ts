@@ -1,3 +1,4 @@
+import {RequestsService} from '../../services/requests.service'
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import {NavController} from '@ionic/angular';
 import {AfterViewInit} from '@angular/core';
@@ -22,6 +23,7 @@ export class MapPage implements AfterViewInit	{
 
   constructor(
 	  public navCtrl: NavController, 
+     public req : RequestsService,
   )
    {
    }
@@ -32,7 +34,7 @@ export class MapPage implements AfterViewInit	{
       this.renderAnimation();
    }
    
-   initialiseWebGLObjectAndEnvironment()
+   async initialiseWebGLObjectAndEnvironment()
    {
 
       // Reference the DOM element that the WebGL generated object 
@@ -62,7 +64,8 @@ export class MapPage implements AfterViewInit	{
       // BoxGeometry class allows us to create a cube (with width, height and depth dimensions supplied as 
       // parameters - default is 1 for these values) 
       this._GEOMETRY            = new THREE.BoxGeometry( 1, 1, 1 ); 
-      this._GEOMETRY 
+      const points =  (await this.req.get("get_pointcloud"))
+      console.log(points)
 
 
       // Define the material (and its appearance) for drawing the geometry to the scene
