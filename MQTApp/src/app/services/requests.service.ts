@@ -53,7 +53,7 @@ export class RequestsService {
         'Authorization': 'Basic am9zZToxMjM0' //+ 'jose:1234'
       },
       //data: JSON.stringify({lock: 1})
-    })
+    })//.catch((error)=> console.log("err", error))
     return rawResponse
   }
 

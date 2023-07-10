@@ -104,7 +104,7 @@ export class TeleopPage implements OnInit{
   updateImage(){
     console.log("update", this.speed)
     var image = document.getElementById("feedback") as HTMLImageElement;
-    console.log(image, image.complete)
+    //console.log(image, image.complete)
 
     if(image.complete) {
         //var new_image = new Image();
@@ -112,7 +112,6 @@ export class TeleopPage implements OnInit{
         //new_image.id = "feedback";
         //console.log(this.sanitizer.bypassSecurityTrustUrl(image.src + '?_=' + new Date().getMilliseconds()))
         image.src = this.url + '?_=' + new Date().getMilliseconds();         
-        console.log("a")  
         // insert new image and remove old
         //image.parentNode.insertBefore(new_image,image);
         //image.parentNode.removeChild(image);

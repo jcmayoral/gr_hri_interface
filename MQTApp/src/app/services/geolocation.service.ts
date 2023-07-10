@@ -14,7 +14,7 @@ export class GeolocationService {
     return this.geolocation.getCurrentPosition().then((resp) => {
       // resp.coords.latitude
       // resp.coords.longitude
-      console.log(resp.coords)
+      //console.log(resp.coords)
       return resp.coords
      }).catch((error) => {
        console.log('Error getting location', error);
@@ -28,7 +28,7 @@ export class GeolocationService {
     // data can be a set of coordinates, or an error (if an error occurred).
     // data.coords.latitude
     // data.coords.longitude
-    console.log("watchdog", data)
+    //console.log("watchdog", data)
    });
 
   } 

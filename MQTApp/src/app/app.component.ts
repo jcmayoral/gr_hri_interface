@@ -28,13 +28,13 @@ export class AppComponent {
     this.timer = setTimeout(async x => 
       {
         console.log("main timer")
-        this.geo.getCurrentPosition()
+        //this.geo.getCurrentPosition()
         //this.haptics.hapticsImpactLight()
 
         if (this.user.isLoggedIn()){
           console.log("skip")
-          const resp =  (await this.request.get("status")).data
-          if (resp.problem){
+          //const resp =  (await this.request.get("status")).data
+          if (false){//resp.problem){
             await this.audio.play('Alert')
 
             await this.haptics.hapticsVibrate().then(()=>{
