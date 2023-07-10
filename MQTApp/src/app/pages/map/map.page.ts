@@ -30,6 +30,7 @@ export class MapPage implements AfterViewInit, OnInit{
      public req : RequestsService,
   )
    {
+      this.setup()
    }
   
   ngAfterViewInit()
@@ -85,22 +86,6 @@ export class MapPage implements AfterViewInit, OnInit{
 
       this._GEOMETRY = new THREE.BufferGeometry();
 
-      // create a simple square shape. We duplicate the top left and bottom right
-      // vertices because each vertex needs to appear once per triangle.
-      const vertices = new Float32Array( [
-         -1.0, -1.0,  1.0, // v0
-         1.0, -1.0,  1.0, // v1
-         1.0,  1.0,  1.0, // v2
-
-         -2.0, -2.0,  2.0, // v0
-         2.0, -2.0,  2.0, // v1
-         2.0,  1.0,  1.0, // v2
-
-         2.0,  2.0,  2.0, // v3
-         -2.0,  2.0,  2.0, // v4
-         -2.0, -2.0,  2.0  // v5
-      ] );
-
       // itemSize = 3 because there are 3 values (components) per vertex
       this._GEOMETRY.morphAttributes.position = []
       //this._GEOMETRY.morphAttributes.color = []
@@ -126,15 +111,17 @@ export class MapPage implements AfterViewInit, OnInit{
          vertices2.push( x, y, z );
       }
       */
+     await this.load_pc();
+   }
 
+   async load_pc(){
+      this._SCENE.remove(this._CUBE)
       const points =  await (await this.req.get("get_pointcloud"))
       let vertices3 = []
       
       points.data.data.forEach(element => {
          vertices3.push(element[0], element[1], element[2])
       });
-
-      console.log(vertices3[10])
 
       const geometry = new THREE.BufferGeometry();
       geometry.setAttribute( 'position', new THREE.Float32BufferAttribute(vertices3, 3 ) );
@@ -144,6 +131,16 @@ export class MapPage implements AfterViewInit, OnInit{
 
       // Define the depth position of the camera
       this._CAMERA.position.z   = 20;
+
+   }
+
+   setup(){
+      setTimeout(x => 
+         {
+            console.log("timer")
+            this.load_pc()
+            this.setup();
+         }, 5000);     
    }
    
    _animate ()
