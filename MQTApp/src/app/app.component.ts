@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { HapticsService } from './services/haptics.service';
 import { RequestsService } from './services/requests.service';
 import { AudioService } from './services/audio.service';
-import { GeolocationService } from './services/geolocation.service';
 
 @Component({
   selector: 'app-root',
@@ -15,10 +14,8 @@ export class AppComponent {
   constructor(private haptics: HapticsService,
               private request: RequestsService, 
               private audio: AudioService, 
-              private geo: GeolocationService,
               private user: User) {
     this.audio.preload('Alert', 'assets/audio/starwars.mp3');
-    this.geo.setWatchDog()
     this.user.createDB()
     this.StartTimer()
   }
