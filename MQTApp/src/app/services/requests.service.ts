@@ -12,9 +12,9 @@ export class RequestsService {
   //endpoint = 'http://grassrobotics.sytes.net:8000/'
   //endpoint = 'http://grassrobotics.ddns.net:8000/'
 
-  //endpoint = 'http://http://201.137.141.171:8000/'
   //endpoint = 'http://192.168.1.66:8000/'
-  endpoint = "http://localhost:8000/"
+  //endpoint = "http://localhost:8000/"
+  endpoint = "http://192.168.18.159:8000/"
 
   //thisendpoint = "https://jselkj.deta.dev/"
 
