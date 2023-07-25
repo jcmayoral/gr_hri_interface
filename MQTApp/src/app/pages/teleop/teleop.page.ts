@@ -26,6 +26,7 @@ export class TeleopPage implements OnInit{
               private sanitizer: DomSanitizer
               ) {
     this.url = "http://192.168.18.159:8000/get_nav_feedback"
+    this.url = "http://172.30.164.118:8000/get_nav_feedback"
     this.speed = new Speed()
   }
 

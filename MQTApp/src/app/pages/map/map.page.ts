@@ -59,13 +59,12 @@ export class MapPage implements AfterViewInit, OnInit{
       // Define an object to manage display of ThreeJS scene
       this.renderer = new THREE.WebGLRenderer();
 
-
       //CONTROLS
       this._CONTROLS = new OrbitControls( this._CAMERA, this.renderer.domElement );
 
 
       // Resizes the output canvas to match the supplied width/height parameters
-      this.renderer.setSize( window.innerWidth, window.innerHeight );
+      this.renderer.setSize( window.innerWidth * 0.5, window.innerHeight );
 
 
       // Attach the canvas, where the renderer draws the scene, to the specified DOM element 
@@ -79,7 +78,8 @@ export class MapPage implements AfterViewInit, OnInit{
 
 
       // Define the material (and its appearance) for drawing the geometry to the scene
-      this._MATERIAL            = new THREE.MeshBasicMaterial( { color: 0xffff00, wireframe : true } );
+      this._MATERIAL = new THREE.MeshBasicMaterial( { color: 0xffff00, wireframe : true } );
+      this._MATERIAL = new THREE.PointsMaterial()
 
 
       // Use the Mesh class to define a polygon mesh based object with the supplied geometry and material objects
@@ -118,14 +118,20 @@ export class MapPage implements AfterViewInit, OnInit{
       this._SCENE.remove(this._CUBE)
       const points =  await (await this.req.get("get_pointcloud"))
       let vertices3 = []
-      
+      let colors = []
+      const color = new THREE.Color();
+   
       points.data.data.forEach(element => {
          vertices3.push(element[0], element[1], element[2])
+         color.setRGB(Math.random() , Math.random() , Math.random());
+         colors.push(color.r, color.g, color.b);
       });
 
       const geometry = new THREE.BufferGeometry();
       geometry.setAttribute( 'position', new THREE.Float32BufferAttribute(vertices3, 3 ) );
-      const material = new THREE.PointsMaterial( { color: 0xFFFFFF, size: 0.1 } );
+      geometry.setAttribute( 'color', new THREE.Float32BufferAttribute(colors, 3 ) );
+
+      const material = new THREE.PointsMaterial( { vertexColors: true, size: 0.1} );
       this._CUBE = new THREE.Points( geometry, material );
       this._SCENE.add( this._CUBE );
 

@@ -4,6 +4,20 @@
     </ion-title>
 </ion-header>
 
-<ion-content padding>
-  <div id="obj" #Obj></div>
+<ion-content max-width="50%">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div id="obj" #Obj></div>
+      </ion-col>
+      <ion-col>
+        <ion-card>
+          <ion-button expand="full"> Save Map </ion-button>
+          <ion-button expand="full"> Reset </ion-button>
+          <ion-button> Start/Stop Mapping </ion-button>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>
