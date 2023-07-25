@@ -64,7 +64,7 @@ export class MapPage implements AfterViewInit, OnInit{
 
 
       // Resizes the output canvas to match the supplied width/height parameters
-      this.renderer.setSize( window.innerWidth * 0.5, window.innerHeight );
+      this.renderer.setSize( window.innerWidth * 0.8, window.innerHeight *0.99);
 
 
       // Attach the canvas, where the renderer draws the scene, to the specified DOM element 
